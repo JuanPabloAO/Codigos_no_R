@@ -1,9 +1,9 @@
-##InstituiÁ„o: Universidade Federal do Rio de Janeiro
-##Curso: Mestrado em EstadÌstica
+##Institui√ß√£o: Universidade Federal do Rio de Janeiro
+##Curso: Mestrado em Estad√≠stica
 ##Autor: Juan Pablo Argote Osorio
 ##Orientador: Carlos Tadeu Pagani Zanini
-##Titulo da dissertaÁ„o: AlocaÁ„o Latente de Dirichlet para Modelagem de TÛpicos em DissertaÁıes de Mestrado em EstatÌstica e ¡reas Correlatas no Brasil
-##Local e data: 15 de abril de 2025
+##Titulo da disserta√ß√£o: Aloca√ß√£o Latente de Dirichlet para Modelagem de T√≥picos em Disserta√ß√µes de Mestrado em Estat√≠stica e √Åreas Correlatas no Brasil
+##Local e data: Rio de Janeiro, 15 de abril de 2025
 
 #Conversao de pdf a txt, e criacao do Corpus:
 
@@ -20,7 +20,7 @@ require(tidyverse)
 
 #Trocando directorio
 
-setwd("C:/...") #DiretÛrio onde vai ficar este script
+setwd("C:/...") #Diret√≥rio onde vai ficar este script
 
 #Removendo caracteres especiais
 removeMarcador <- function(texto,marcador){
@@ -28,7 +28,7 @@ removeMarcador <- function(texto,marcador){
   return(PlainTextDocument(texto))
 }
 
-#####BASE DE DADOS DE RESUMOS EM INGL S:#####
+#####BASE DE DADOS DE RESUMOS EM INGL√äS:#####
 
 ##Criando funcao:
 
@@ -78,7 +78,7 @@ corpus=lemmatize_words(corpus)
 corpus <- tm_map(corpus,content_transformer(removeMarcador),"-")
 corpus <- tm_map(corpus,content_transformer(removeMarcador),"[0-9]+")
 corpus <- tm_map(corpus,content_transformer(removeMarcador),"abstract")
-corpus <- tm_map(corpus,content_transformer(removeMarcador),"[ëíìî]")
+corpus <- tm_map(corpus,content_transformer(removeMarcador),"[‚Äò‚Äô‚Äú‚Äù]")
 #corpus <- tm_map(corpus,content_transformer(removeMarcador),"<.>")
 corpus <- tm_map(corpus,content_transformer(removeMarcador),"<[^>]*>")
 #corpus <- tm_map(corpus,content_transformer(removeMarcador),"rio")
@@ -153,12 +153,12 @@ BD_Final_uni=BD_Final_uni[-c(2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21,22
 ##Codificando as palavras:
 
 BD_Final_uni=cbind(BD_Final_uni,seq(1,dim(BD_Final_uni)[1],1))
-colnames(BD_Final_uni)=c("Termos","Freq","CÛdigo")
+colnames(BD_Final_uni)=c("Termos","Freq","C√≥digo")
 
-####Base de dados com a coluna dos cÛdigos:
+####Base de dados com a coluna dos c√≥digos:
 
 #BD_cod=cbind(BD_Final,BD_Final[,1])
-#colnames(BD_cod)=c("CÛdigo","Freq","Documento","IES","Termos")
+#colnames(BD_cod)=c("C√≥digo","Freq","Documento","IES","Termos")
 
 #df1=data.frame(BD_cod[,5])
 #colnames(df1)="Termos"
@@ -176,7 +176,7 @@ BD_cod=left_join(BD_Final,distinct(BD_Final_uni[,-2]),by="Termos")
 doc_ies=cbind(BD_cod$Documento,BD_cod$IES)
 doc_ies=unique(doc_ies)
 doc_ies=cbind(doc_ies,seq(1,nrow(doc_ies),1))
-colnames(doc_ies)=c("Documento","IES","CÛdigo")
+colnames(doc_ies)=c("Documento","IES","C√≥digo")
 
 BD1_1=left_join(BD_cod,distinct(data.frame(doc_ies)),by=c("Documento"="Documento","IES"="IES"))
 BD1_1=cbind(BD1_1[,5],BD1_1[,6],BD1_1[,2])
@@ -207,7 +207,7 @@ write.csv(BD_Final_uni, csv_path, row.names = FALSE)
 ##Para olhar o nome do arquivo:
 #rownames(summary(corpus))[]
 
-####Gerando os arquivos ‡ ser compartilhados no Google Drive:
+####Gerando os arquivos √† ser compartilhados no Google Drive:
 
 csv_path  = 'BD1_1.csv'
 write.csv(BD1_1, csv_path, row.names = FALSE)
@@ -254,12 +254,12 @@ mcmc_cpp( data = as.matrix(data), w , K = 20, n_iter = 10, save_it = 5 )
 end = Sys.time()
 end - start
 
-#save(chain, file = "./C”DIGOS EN R/neurips/mcmc_chain_10.Rdata")
+#save(chain, file = "./C√ìDIGOS EN R/neurips/mcmc_chain_10.Rdata")
 
 ###########################################################################
 ###########################################################################
 
-########Escolha de 10 tÛpicos:
+########Escolha de 10 t√≥picos:
 ####Cadeias para 10000 iteracoes:
 
 start = Sys.time()
@@ -269,7 +269,7 @@ end - start
 
 save(chain_10000_10,file="chain_10000_10.RData")
 
-########Escolha de 20 tÛpicos:
+########Escolha de 20 t√≥picos:
 ####Cadeias para 10000 iteracoes:
 
 start = Sys.time()
@@ -279,7 +279,7 @@ end - start
 
 save(chain_10000_20,file="chain_10000_20.RData")
 
-########Escolha de 30 tÛpicos:
+########Escolha de 30 t√≥picos:
 ####Cadeias para 10000 iteracoes:
 
 start = Sys.time()
@@ -289,7 +289,7 @@ end - start
 
 save(chain_10000_30,file="chain_10000_30.RData")
 
-########Escolha de 40 tÛpicos:
+########Escolha de 40 t√≥picos:
 ####Cadeias para 10000 iteracoes:
 
 start = Sys.time()
@@ -299,7 +299,7 @@ end - start
 
 save(chain_10000_40,file="chain_10000_40.RData")
 
-########Escolha de 50 tÛpicos:
+########Escolha de 50 t√≥picos:
 ####Cadeias para 10000 iteracoes:
 
 start = Sys.time()
@@ -309,7 +309,7 @@ end - start
 
 save(chain_10000_50,file="chain_10000_50.RData")
 
-#####C·lculo do AIC (Akaike Information Criterion):
+#####C√°lculo do AIC (Akaike Information Criterion):
 
 load("chain_10000_10.RData")
 aic_10t=AIC_LDA(data_mat=data,chain=chain_10000_10,mcmc_ind=1:dim(chain_10000_10[[1]])[3])
@@ -343,12 +343,12 @@ load("aic_50t.RData")
 
 tabela_aic=rbind(aic_10t[[1]],aic_20t[[1]],aic_30t[[1]],aic_40t[[1]],aic_50t[[1]])
 colnames(tabela_aic)="Valor do AIC"
-rownames(tabela_aic)=c("Modelo com 10 tÛpicos","Modelo com 20 tÛpicos",
-"Modelo com 30 tÛpicos","Modelo com 40 tÛpicos","Modelo com 50 tÛpicos")
+rownames(tabela_aic)=c("Modelo com 10 t√≥picos","Modelo com 20 t√≥picos",
+"Modelo com 30 t√≥picos","Modelo com 40 t√≥picos","Modelo com 50 t√≥picos")
 
-tabela_aic #O melhor modelo È o que tem 10 tÛpicos
+tabela_aic #O melhor modelo √© o que tem 10 t√≥picos
 
-#####C·lculo do BIC (Bayesian Information Criterion):
+#####C√°lculo do BIC (Bayesian Information Criterion):
 
 load("chain_10000_10.RData")
 bic_10t=BIC_LDA(data_mat=data,chain=chain_10000_10,mcmc_ind=1:dim(chain_10000_10[[1]])[3])
@@ -382,12 +382,12 @@ load("bic_50t.RData")
 
 tabela_bic=rbind(bic_10t[[1]],bic_20t[[1]],bic_30t[[1]],bic_40t[[1]],bic_50t[[1]])
 colnames(tabela_bic)="Valor do BIC"
-rownames(tabela_bic)=c("Modelo com 10 tÛpicos","Modelo com 20 tÛpicos",
-"Modelo com 30 tÛpicos","Modelo com 40 tÛpicos","Modelo com 50 tÛpicos")
+rownames(tabela_bic)=c("Modelo com 10 t√≥picos","Modelo com 20 t√≥picos",
+"Modelo com 30 t√≥picos","Modelo com 40 t√≥picos","Modelo com 50 t√≥picos")
 
-tabela_bic #O melhor modelo È o que tem 10 tÛpicos
+tabela_bic #O melhor modelo √© o que tem 10 t√≥picos
 
-#####C·lculo do DIC (Deviance Information Criterion):
+#####C√°lculo do DIC (Deviance Information Criterion):
 
 load("chain_10000_10.RData")
 dic_10t=DIC_LDA(data_mat=data,chain=chain_10000_10,mcmc_ind=1:dim(chain_10000_10[[1]])[3])
@@ -421,20 +421,20 @@ load("dic_50t.RData")
 
 tabela_dic=rbind(dic_10t,dic_20t,dic_30t,dic_40t,dic_50t)
 colnames(tabela_dic)="Valor do DIC"
-rownames(tabela_dic)=c("Modelo com 10 tÛpicos","Modelo com 20 tÛpicos",
-"Modelo com 30 tÛpicos","Modelo com 40 tÛpicos","Modelo com 50 tÛpicos")
+rownames(tabela_dic)=c("Modelo com 10 t√≥picos","Modelo com 20 t√≥picos",
+"Modelo com 30 t√≥picos","Modelo com 40 t√≥picos","Modelo com 50 t√≥picos")
 
-tabela_dic #O melhor modelo È o que tem 50 tÛpicos
+tabela_dic #O melhor modelo √© o que tem 50 t√≥picos
 
-##Valor do DIC, para o modelo com 100 tÛpicos (c·lculo feito pelo professor),
-##valor igual ‡ 765013.6:
+##Valor do DIC, para o modelo com 100 t√≥picos (c√°lculo feito pelo professor),
+##valor igual √† 765013.6:
 
 tabela_dic1=rbind(tabela_dic,765013.6)
 
-rownames(tabela_dic1)[6]="Modelo com 100 tÛpicos"
+rownames(tabela_dic1)[6]="Modelo com 100 t√≥picos"
 tabela_dic1
 
-###WatanabeñAkaike Information Criterion (WAIC):
+###Watanabe‚ÄìAkaike Information Criterion (WAIC):
 
 require(LaplacesDemon)
 
@@ -471,10 +471,10 @@ load("waic_50t.RData")
 tabela_waic=rbind(waic_10t$WAIC,waic_20t$WAIC,waic_30t$WAIC,waic_40t$WAIC,
 waic_50t$WAIC)
 colnames(tabela_waic)="Valor do WAIC"
-rownames(tabela_waic)=c("Modelo com 10 tÛpicos","Modelo com 20 tÛpicos",
-"Modelo com 30 tÛpicos","Modelo com 40 tÛpicos","Modelo com 50 tÛpicos")
+rownames(tabela_waic)=c("Modelo com 10 t√≥picos","Modelo com 20 t√≥picos",
+"Modelo com 30 t√≥picos","Modelo com 40 t√≥picos","Modelo com 50 t√≥picos")
 
-tabela_waic #O melhor modelo È o que tem 50 tÛpicos
+tabela_waic #O melhor modelo √© o que tem 50 t√≥picos
 
 ###Tabela com todos os criterios de informacao:
 
@@ -485,9 +485,9 @@ tabela_crit
 #write.csv(tabela_crit, csv_path, row.names = TRUE)
 
 ##########################################################################
-####C·lculo de MCMC para modelos com 2-9, 11-15 tÛpicos, e o c·lculo dos
-####seus criterios de informacao; depois de olhar que o melhor modelo est·
-####perto do modelo com 10 tÛpicos:
+####C√°lculo de MCMC para modelos com 2-9, 11-15 t√≥picos, e o c√°lculo dos
+####seus criterios de informacao; depois de olhar que o melhor modelo est√°
+####perto do modelo com 10 t√≥picos:
 
 start = Sys.time()
 chain_10000_2=mcmc_cpp( data = as.matrix(data), w , K = 2,burning = 500, n_iter = 10000, save_it = 5 )
@@ -580,8 +580,8 @@ end - start
 
 save(chain_10000_15,file="chain_10000_15.RData")
 
-#####Modelos com 2-9, 11-15 tÛpicos:
-#####C·lculo do AIC (Akaike Information Criterion):
+#####Modelos com 2-9, 11-15 t√≥picos:
+#####C√°lculo do AIC (Akaike Information Criterion):
 
 #load("chain_10000_2.RData")
 aic_2t=AIC_LDA(data_mat=data,chain=chain_10000_2,mcmc_ind=1:dim(chain_10000_2[[1]])[3])
@@ -657,15 +657,15 @@ tabela_aic1=rbind(aic_2t[[1]],aic_3t[[1]],aic_4t[[1]],aic_5t[[1]],aic_6t[[1]],
 aic_7t[[1]],aic_8t[[1]],aic_9t[[1]],aic_11t[[1]],aic_12t[[1]],aic_13t[[1]],
 aic_14t[[1]],aic_15t[[1]])
 colnames(tabela_aic1)="Valor do AIC"
-rownames(tabela_aic1)=c("Modelo com 2 tÛpicos","Modelo com 3 tÛpicos",
-"Modelo com 4 tÛpicos","Modelo com 5 tÛpicos","Modelo com 6 tÛpicos",
-"Modelo com 7 tÛpicos","Modelo com 8 tÛpicos","Modelo com 9 tÛpicos",
-"Modelo com 11 tÛpicos","Modelo com 12 tÛpicos","Modelo com 13 tÛpicos",
-"Modelo com 14 tÛpicos","Modelo com 15 tÛpicos")
+rownames(tabela_aic1)=c("Modelo com 2 t√≥picos","Modelo com 3 t√≥picos",
+"Modelo com 4 t√≥picos","Modelo com 5 t√≥picos","Modelo com 6 t√≥picos",
+"Modelo com 7 t√≥picos","Modelo com 8 t√≥picos","Modelo com 9 t√≥picos",
+"Modelo com 11 t√≥picos","Modelo com 12 t√≥picos","Modelo com 13 t√≥picos",
+"Modelo com 14 t√≥picos","Modelo com 15 t√≥picos")
 
-tabela_aic1 #O melhor modelo È o que tem _ tÛpicos
+tabela_aic1 #O melhor modelo √© o que tem _ t√≥picos
 
-#####C·lculo do BIC (Bayesian Information Criterion):
+#####C√°lculo do BIC (Bayesian Information Criterion):
 
 #load("chain_10000_2.RData")
 bic_2t=BIC_LDA(data_mat=data,chain=chain_10000_2,mcmc_ind=1:dim(chain_10000_2[[1]])[3])
@@ -741,15 +741,15 @@ tabela_bic1=rbind(bic_2t[[1]],bic_3t[[1]],bic_4t[[1]],bic_5t[[1]],bic_6t[[1]],
 bic_7t[[1]],bic_8t[[1]],bic_9t[[1]],bic_11t[[1]],bic_12t[[1]],bic_13t[[1]],
 bic_14t[[1]],bic_15t[[1]])
 colnames(tabela_bic1)="Valor do BIC"
-rownames(tabela_bic1)=c("Modelo com 2 tÛpicos","Modelo com 3 tÛpicos",
-"Modelo com 4 tÛpicos","Modelo com 5 tÛpicos","Modelo com 6 tÛpicos",
-"Modelo com 7 tÛpicos","Modelo com 8 tÛpicos","Modelo com 9 tÛpicos",
-"Modelo com 11 tÛpicos","Modelo com 12 tÛpicos","Modelo com 13 tÛpicos",
-"Modelo com 14 tÛpicos","Modelo com 15 tÛpicos")
+rownames(tabela_bic1)=c("Modelo com 2 t√≥picos","Modelo com 3 t√≥picos",
+"Modelo com 4 t√≥picos","Modelo com 5 t√≥picos","Modelo com 6 t√≥picos",
+"Modelo com 7 t√≥picos","Modelo com 8 t√≥picos","Modelo com 9 t√≥picos",
+"Modelo com 11 t√≥picos","Modelo com 12 t√≥picos","Modelo com 13 t√≥picos",
+"Modelo com 14 t√≥picos","Modelo com 15 t√≥picos")
 
-tabela_bic1 #O melhor modelo È o que tem _ tÛpicos
+tabela_bic1 #O melhor modelo √© o que tem _ t√≥picos
 
-#####C·lculo do DIC (Deviance Information Criterion):
+#####C√°lculo do DIC (Deviance Information Criterion):
 
 #load("chain_10000_2.RData")
 dic_2t=DIC_LDA(data_mat=data,chain=chain_10000_2,mcmc_ind=1:dim(chain_10000_2[[1]])[3])
@@ -825,15 +825,15 @@ tabela_dic1=rbind(dic_2t,dic_3t,dic_4t,dic_5t,dic_6t,
 dic_7t,dic_8t,dic_9t,dic_11t,dic_12t,dic_13t,
 dic_14t,dic_15t)
 colnames(tabela_dic1)="Valor do DIC"
-rownames(tabela_dic1)=c("Modelo com 2 tÛpicos","Modelo com 3 tÛpicos",
-"Modelo com 4 tÛpicos","Modelo com 5 tÛpicos","Modelo com 6 tÛpicos",
-"Modelo com 7 tÛpicos","Modelo com 8 tÛpicos","Modelo com 9 tÛpicos",
-"Modelo com 11 tÛpicos","Modelo com 12 tÛpicos","Modelo com 13 tÛpicos",
-"Modelo com 14 tÛpicos","Modelo com 15 tÛpicos")
+rownames(tabela_dic1)=c("Modelo com 2 t√≥picos","Modelo com 3 t√≥picos",
+"Modelo com 4 t√≥picos","Modelo com 5 t√≥picos","Modelo com 6 t√≥picos",
+"Modelo com 7 t√≥picos","Modelo com 8 t√≥picos","Modelo com 9 t√≥picos",
+"Modelo com 11 t√≥picos","Modelo com 12 t√≥picos","Modelo com 13 t√≥picos",
+"Modelo com 14 t√≥picos","Modelo com 15 t√≥picos")
 
-tabela_dic1 #O melhor modelo È o que tem _ tÛpicos
+tabela_dic1 #O melhor modelo √© o que tem _ t√≥picos
 
-###WatanabeñAkaike Information Criterion (WAIC):
+###Watanabe‚ÄìAkaike Information Criterion (WAIC):
 
 require(LaplacesDemon)
 
@@ -911,13 +911,13 @@ tabela_waic1=rbind(waic_2t[[1]],waic_3t[[1]],waic_4t[[1]],waic_5t[[1]],
 waic_6t[[1]],waic_7t[[1]],waic_8t[[1]],waic_9t[[1]],waic_11t[[1]],waic_12t[[1]],
 waic_13t[[1]],waic_14t[[1]],waic_15t[[1]])
 colnames(tabela_waic1)="Valor do WAIC"
-rownames(tabela_waic1)=c("Modelo com 2 tÛpicos","Modelo com 3 tÛpicos",
-"Modelo com 4 tÛpicos","Modelo com 5 tÛpicos","Modelo com 6 tÛpicos",
-"Modelo com 7 tÛpicos","Modelo com 8 tÛpicos","Modelo com 9 tÛpicos",
-"Modelo com 11 tÛpicos","Modelo com 12 tÛpicos","Modelo com 13 tÛpicos",
-"Modelo com 14 tÛpicos","Modelo com 15 tÛpicos")
+rownames(tabela_waic1)=c("Modelo com 2 t√≥picos","Modelo com 3 t√≥picos",
+"Modelo com 4 t√≥picos","Modelo com 5 t√≥picos","Modelo com 6 t√≥picos",
+"Modelo com 7 t√≥picos","Modelo com 8 t√≥picos","Modelo com 9 t√≥picos",
+"Modelo com 11 t√≥picos","Modelo com 12 t√≥picos","Modelo com 13 t√≥picos",
+"Modelo com 14 t√≥picos","Modelo com 15 t√≥picos")
 
-tabela_waic1 #O melhor modelo È o que tem _ tÛpicos
+tabela_waic1 #O melhor modelo √© o que tem _ t√≥picos
 
 ###Tabela com todos os criterios de informacao:
 
@@ -935,27 +935,27 @@ tabela_crit_total
 #csv_path  = 'Tabela_crit_total.csv'
 #write.csv(tabela_crit_total, csv_path, row.names = TRUE)
 
-###Gr·ficos dos criterios nos modelos LDA, com diferente n˙mero de tÛpicos:
+###Gr√°ficos dos criterios nos modelos LDA, com diferente n√∫mero de t√≥picos:
 
 par(mfrow=c(1,2))
 
 ##DIC:
 
 plot(x=c(2:15,20,30,40,50),y=tabela_crit_total[,3],
-xlab="N˙mero de tÛpicos (k)",ylab="Valor calculado do DIC",type="l",
+xlab="N√∫mero de t√≥picos (k)",ylab="Valor calculado do DIC",type="l",
 main="Valor calculado do DIC para modelos LDA
- com diferente n˙mero de tÛpicos (k)")
+ com diferente n√∫mero de t√≥picos (k)")
 
 ##WAIC
 
 plot(x=c(2:15,20,30,40,50),y=tabela_crit_total[,4],
-xlab="N˙mero de tÛpicos (k)",ylab="Valor calculado do WAIC",type="l",
+xlab="N√∫mero de t√≥picos (k)",ylab="Valor calculado do WAIC",type="l",
 main="Valor calculado do WAIC para modelos LDA
- com diferente n˙mero de tÛpicos (k)")
+ com diferente n√∫mero de t√≥picos (k)")
 
 ###############################################################################
 ####Calculando novamente o valor do AIC e BIC,
-####disminuindo o n˙mero de palavras (V)
+####disminuindo o n√∫mero de palavras (V)
 ################################################################################
 
 lista_palavras=0
@@ -978,17 +978,17 @@ tf_lp=table(lista_palavras) #Tabela de frequencia da lista de palavras
 
 tf_lp=as.matrix(tf_lp)
 
-#length(lista_palavras)-sum(tf_lp)  #N˙mero de NA, 517
+#length(lista_palavras)-sum(tf_lp)  #N√∫mero de NA, 517
 #summary(lista_palavras)[7]
 
-barplot(table(tf_lp),xlab="FrequÍncia da palavra no vocabul·rio",
-ylab="N˙mero de palavras con essa frequÍncia")
+barplot(table(tf_lp),xlab="Frequ√™ncia da palavra no vocabul√°rio",
+ylab="N√∫mero de palavras con essa frequ√™ncia")
 
-tf_fpv=as.matrix(table(tf_lp)) #Tabela de frequencia, da frequencia das palavras no vocabul·rio
+tf_fpv=as.matrix(table(tf_lp)) #Tabela de frequencia, da frequencia das palavras no vocabul√°rio
 
 head(tf_fpv)
 
-l_tf_fpv=0    #Lista de frequÍncias
+l_tf_fpv=0    #Lista de frequ√™ncias
 
 for(i in 1:length(tf_fpv)){
 
@@ -1001,7 +1001,7 @@ summary(as.numeric(l_tf_fpv))
 boxplot(as.numeric(l_tf_fpv))
 
 ###
-##Agrupando as palavras com frequÍncia maior ou igual do que 30, para barplot:
+##Agrupando as palavras com frequ√™ncia maior ou igual do que 30, para barplot:
 
 tf_lp2=tf_lp
 ind_mai30=which(tf_lp2>=30)
@@ -1012,14 +1012,14 @@ tf_lp2_mais30=c(tf_lp2_sem_mai30,rep(30,length(ind_mai30)))
 tabela=table(tf_lp2_mais30)
 names(tabela)[30]="+30"
 
-barplot(tabela,xlab="FrequÍncia da palavra no corpus",
-ylab="N˙mero de palavras com essa frequÍncia",cex.lab=1.7)
+barplot(tabela,xlab="Frequ√™ncia da palavra no corpus",
+ylab="N√∫mero de palavras com essa frequ√™ncia",cex.lab=1.7)
 
-##Olha-se que o primeiro quartil È dos documentos com frequÍncia "1", entao
-##tira-se o n˙mero de palavras com essa frequÍncia no vocavulario
+##Olha-se que o primeiro quartil √© dos documentos com frequ√™ncia "1", entao
+##tira-se o n√∫mero de palavras com essa frequ√™ncia no vocavulario
 
-#V_new=length(tf_lp)-tf_fpv[1] #O novo tamanho do vocabul·rio (V) È de 3457 palavras
-V_new=length(tf_lp)-sum(tf_fpv[1:3]) #O novo tamanho do vocabul·rio (V) È de 2113 palavras, tirando as palavras com frequÍncia entre 1 e 3
+#V_new=length(tf_lp)-tf_fpv[1] #O novo tamanho do vocabul√°rio (V) √© de 3457 palavras
+V_new=length(tf_lp)-sum(tf_fpv[1:3]) #O novo tamanho do vocabul√°rio (V) √© de 2113 palavras, tirando as palavras com frequ√™ncia entre 1 e 3
 
 V_new
 
@@ -1046,58 +1046,58 @@ load("aic_14t.RData")
 load("aic_15t.RData")
 
 p = dim(aic_10t$beta_hat)[1]*V_new + dim(aic_10t$theta_hat)[1]*dim(aic_10t$theta_hat)[2]
-aic_10t_new = 2*p-2*aic_10t$Log_VerossimilhanÁa
+aic_10t_new = 2*p-2*aic_10t$Log_Verossimilhan√ßa
 
 p = dim(aic_20t$beta_hat)[1]*V_new + dim(aic_20t$theta_hat)[1]*dim(aic_20t$theta_hat)[2]
-aic_20t_new = 2*p-2*aic_20t$Log_VerossimilhanÁa
+aic_20t_new = 2*p-2*aic_20t$Log_Verossimilhan√ßa
 
 p = dim(aic_30t$beta_hat)[1]*V_new + dim(aic_30t$theta_hat)[1]*dim(aic_30t$theta_hat)[2]
-aic_30t_new = 2*p-2*aic_30t$Log_VerossimilhanÁa
+aic_30t_new = 2*p-2*aic_30t$Log_Verossimilhan√ßa
 
 p = dim(aic_40t$beta_hat)[1]*V_new + dim(aic_40t$theta_hat)[1]*dim(aic_40t$theta_hat)[2]
-aic_40t_new = 2*p-2*aic_40t$Log_VerossimilhanÁa
+aic_40t_new = 2*p-2*aic_40t$Log_Verossimilhan√ßa
 
 p = dim(aic_50t$beta_hat)[1]*V_new + dim(aic_50t$theta_hat)[1]*dim(aic_50t$theta_hat)[2]
-aic_50t_new = 2*p-2*aic_50t$Log_VerossimilhanÁa
+aic_50t_new = 2*p-2*aic_50t$Log_Verossimilhan√ßa
 
 p = dim(aic_2t$beta_hat)[1]*V_new + dim(aic_2t$theta_hat)[1]*dim(aic_2t$theta_hat)[2]
-aic_2t_new = 2*p-2*aic_2t$Log_VerossimilhanÁa
+aic_2t_new = 2*p-2*aic_2t$Log_Verossimilhan√ßa
 
 p = dim(aic_3t$beta_hat)[1]*V_new + dim(aic_3t$theta_hat)[1]*dim(aic_3t$theta_hat)[2]
-aic_3t_new = 2*p-2*aic_3t$Log_VerossimilhanÁa
+aic_3t_new = 2*p-2*aic_3t$Log_Verossimilhan√ßa
 
 p = dim(aic_4t$beta_hat)[1]*V_new + dim(aic_4t$theta_hat)[1]*dim(aic_4t$theta_hat)[2]
-aic_4t_new = 2*p-2*aic_4t$Log_VerossimilhanÁa
+aic_4t_new = 2*p-2*aic_4t$Log_Verossimilhan√ßa
 
 p = dim(aic_5t$beta_hat)[1]*V_new + dim(aic_5t$theta_hat)[1]*dim(aic_5t$theta_hat)[2]
-aic_5t_new = 2*p-2*aic_5t$Log_VerossimilhanÁa
+aic_5t_new = 2*p-2*aic_5t$Log_Verossimilhan√ßa
 
 p = dim(aic_6t$beta_hat)[1]*V_new + dim(aic_6t$theta_hat)[1]*dim(aic_6t$theta_hat)[2]
-aic_6t_new = 2*p-2*aic_6t$Log_VerossimilhanÁa
+aic_6t_new = 2*p-2*aic_6t$Log_Verossimilhan√ßa
 
 p = dim(aic_7t$beta_hat)[1]*V_new + dim(aic_7t$theta_hat)[1]*dim(aic_7t$theta_hat)[2]
-aic_7t_new = 2*p-2*aic_7t$Log_VerossimilhanÁa
+aic_7t_new = 2*p-2*aic_7t$Log_Verossimilhan√ßa
 
 p = dim(aic_8t$beta_hat)[1]*V_new + dim(aic_8t$theta_hat)[1]*dim(aic_8t$theta_hat)[2]
-aic_8t_new = 2*p-2*aic_8t$Log_VerossimilhanÁa
+aic_8t_new = 2*p-2*aic_8t$Log_Verossimilhan√ßa
 
 p = dim(aic_9t$beta_hat)[1]*V_new + dim(aic_9t$theta_hat)[1]*dim(aic_9t$theta_hat)[2]
-aic_9t_new = 2*p-2*aic_9t$Log_VerossimilhanÁa
+aic_9t_new = 2*p-2*aic_9t$Log_Verossimilhan√ßa
 
 p = dim(aic_11t$beta_hat)[1]*V_new + dim(aic_11t$theta_hat)[1]*dim(aic_11t$theta_hat)[2]
-aic_11t_new = 2*p-2*aic_11t$Log_VerossimilhanÁa
+aic_11t_new = 2*p-2*aic_11t$Log_Verossimilhan√ßa
 
 p = dim(aic_12t$beta_hat)[1]*V_new + dim(aic_12t$theta_hat)[1]*dim(aic_12t$theta_hat)[2]
-aic_12t_new = 2*p-2*aic_12t$Log_VerossimilhanÁa
+aic_12t_new = 2*p-2*aic_12t$Log_Verossimilhan√ßa
 
 p = dim(aic_13t$beta_hat)[1]*V_new + dim(aic_13t$theta_hat)[1]*dim(aic_13t$theta_hat)[2]
-aic_13t_new = 2*p-2*aic_13t$Log_VerossimilhanÁa
+aic_13t_new = 2*p-2*aic_13t$Log_Verossimilhan√ßa
 
 p = dim(aic_14t$beta_hat)[1]*V_new + dim(aic_14t$theta_hat)[1]*dim(aic_14t$theta_hat)[2]
-aic_14t_new = 2*p-2*aic_14t$Log_VerossimilhanÁa
+aic_14t_new = 2*p-2*aic_14t$Log_Verossimilhan√ßa
 
 p = dim(aic_15t$beta_hat)[1]*V_new + dim(aic_15t$theta_hat)[1]*dim(aic_15t$theta_hat)[2]
-aic_15t_new = 2*p-2*aic_15t$Log_VerossimilhanÁa
+aic_15t_new = 2*p-2*aic_15t$Log_Verossimilhan√ßa
 
 ##Tabela do AIC com novo "V":
 
@@ -1105,18 +1105,18 @@ tabela_aic_new=rbind(aic_2t_new,aic_3t_new,aic_4t_new,aic_5t_new,aic_6t_new,
 aic_7t_new,aic_8t_new,aic_9t_new,aic_11t_new,aic_12t_new,aic_13t_new,
 aic_14t_new,aic_15t_new,aic_10t_new,aic_20t_new,aic_30t_new,aic_40t_new,aic_50t_new)
 colnames(tabela_aic_new)="Valor do AIC"
-rownames(tabela_aic_new)=c("Modelo com 2 tÛpicos","Modelo com 3 tÛpicos",
-"Modelo com 4 tÛpicos","Modelo com 5 tÛpicos","Modelo com 6 tÛpicos",
-"Modelo com 7 tÛpicos","Modelo com 8 tÛpicos","Modelo com 9 tÛpicos",
-"Modelo com 11 tÛpicos","Modelo com 12 tÛpicos","Modelo com 13 tÛpicos",
-"Modelo com 14 tÛpicos","Modelo com 15 tÛpicos","Modelo com 10 tÛpicos",
-"Modelo com 20 tÛpicos","Modelo com 30 tÛpicos","Modelo com 40 tÛpicos",
-"Modelo com 50 tÛpicos")
+rownames(tabela_aic_new)=c("Modelo com 2 t√≥picos","Modelo com 3 t√≥picos",
+"Modelo com 4 t√≥picos","Modelo com 5 t√≥picos","Modelo com 6 t√≥picos",
+"Modelo com 7 t√≥picos","Modelo com 8 t√≥picos","Modelo com 9 t√≥picos",
+"Modelo com 11 t√≥picos","Modelo com 12 t√≥picos","Modelo com 13 t√≥picos",
+"Modelo com 14 t√≥picos","Modelo com 15 t√≥picos","Modelo com 10 t√≥picos",
+"Modelo com 20 t√≥picos","Modelo com 30 t√≥picos","Modelo com 40 t√≥picos",
+"Modelo com 50 t√≥picos")
 
 tabela_aic_new
 
 plot(x=c(2:15,20,30,40,50),y=tabela_aic_new[c(1:8,14,9:13,15:18)],
-xlab="N˙mero de tÛpicos (K)",ylab="Valor do AIC",type="l")#,main="C·lculo do AIC, tirando as palavras do vocabulario com frequÍncia igual desde 1 atÈ 3")
+xlab="N√∫mero de t√≥picos (K)",ylab="Valor do AIC",type="l")#,main="C√°lculo do AIC, tirando as palavras do vocabulario com frequ√™ncia igual desde 1 at√© 3")
 points(x=c(2:15,20,30,40,50),y=tabela_aic_new[c(1:8,14,9:13,15:18)],
 pch=19,cex=0.8)
 
@@ -1142,62 +1142,62 @@ load("bic_13t.RData")
 load("bic_14t.RData")
 load("bic_15t.RData")
 
-#nw_new=bic_10t$N˙mero_de_ObservaÁıes-tf_fpv[1]  #Tirando as observacoes correspondentes as palavras com frequÍncia igual ‡ 1
-nw_new=bic_10t$N˙mero_de_ObservaÁıes-(tf_fpv[1]+2*tf_fpv[2]+3*tf_fpv[3]) #Tirando as observacoes correspondentes as palavras com frequÍncia igual ‡ 1 atÈ 3
+#nw_new=bic_10t$N√∫mero_de_Observa√ß√µes-tf_fpv[1]  #Tirando as observacoes correspondentes as palavras com frequ√™ncia igual √† 1
+nw_new=bic_10t$N√∫mero_de_Observa√ß√µes-(tf_fpv[1]+2*tf_fpv[2]+3*tf_fpv[3]) #Tirando as observacoes correspondentes as palavras com frequ√™ncia igual √† 1 at√© 3
 
 p = dim(bic_10t$beta_hat)[1]*V_new + dim(bic_10t$theta_hat)[1]*dim(bic_10t$theta_hat)[2]
-bic_10t_new = p*log(nw_new)-2*bic_10t$Log_VerossimilhanÁa
+bic_10t_new = p*log(nw_new)-2*bic_10t$Log_Verossimilhan√ßa
 
 p = dim(bic_20t$beta_hat)[1]*V_new + dim(bic_20t$theta_hat)[1]*dim(bic_20t$theta_hat)[2]
-bic_20t_new = p*log(nw_new)-2*bic_20t$Log_VerossimilhanÁa
+bic_20t_new = p*log(nw_new)-2*bic_20t$Log_Verossimilhan√ßa
 
 p = dim(bic_30t$beta_hat)[1]*V_new + dim(bic_30t$theta_hat)[1]*dim(bic_30t$theta_hat)[2]
-bic_30t_new = p*log(nw_new)-2*bic_30t$Log_VerossimilhanÁa
+bic_30t_new = p*log(nw_new)-2*bic_30t$Log_Verossimilhan√ßa
 
 p = dim(bic_40t$beta_hat)[1]*V_new + dim(bic_40t$theta_hat)[1]*dim(bic_40t$theta_hat)[2]
-bic_40t_new = p*log(nw_new)-2*bic_40t$Log_VerossimilhanÁa
+bic_40t_new = p*log(nw_new)-2*bic_40t$Log_Verossimilhan√ßa
 
 p = dim(bic_50t$beta_hat)[1]*V_new + dim(bic_50t$theta_hat)[1]*dim(bic_50t$theta_hat)[2]
-bic_50t_new = p*log(nw_new)-2*bic_50t$Log_VerossimilhanÁa
+bic_50t_new = p*log(nw_new)-2*bic_50t$Log_Verossimilhan√ßa
 
 p = dim(bic_2t$beta_hat)[1]*V_new + dim(bic_2t$theta_hat)[1]*dim(bic_2t$theta_hat)[2]
-bic_2t_new = p*log(nw_new)-2*bic_2t$Log_VerossimilhanÁa
+bic_2t_new = p*log(nw_new)-2*bic_2t$Log_Verossimilhan√ßa
 
 p = dim(bic_3t$beta_hat)[1]*V_new + dim(bic_3t$theta_hat)[1]*dim(bic_3t$theta_hat)[2]
-bic_3t_new = p*log(nw_new)-2*bic_3t$Log_VerossimilhanÁa
+bic_3t_new = p*log(nw_new)-2*bic_3t$Log_Verossimilhan√ßa
 
 p = dim(bic_4t$beta_hat)[1]*V_new + dim(bic_4t$theta_hat)[1]*dim(bic_4t$theta_hat)[2]
-bic_4t_new = p*log(nw_new)-2*bic_4t$Log_VerossimilhanÁa
+bic_4t_new = p*log(nw_new)-2*bic_4t$Log_Verossimilhan√ßa
 
 p = dim(bic_5t$beta_hat)[1]*V_new + dim(bic_5t$theta_hat)[1]*dim(bic_5t$theta_hat)[2]
-bic_5t_new = p*log(nw_new)-2*bic_5t$Log_VerossimilhanÁa
+bic_5t_new = p*log(nw_new)-2*bic_5t$Log_Verossimilhan√ßa
 
 p = dim(bic_6t$beta_hat)[1]*V_new + dim(bic_6t$theta_hat)[1]*dim(bic_6t$theta_hat)[2]
-bic_6t_new = p*log(nw_new)-2*bic_6t$Log_VerossimilhanÁa
+bic_6t_new = p*log(nw_new)-2*bic_6t$Log_Verossimilhan√ßa
 
 p = dim(bic_7t$beta_hat)[1]*V_new + dim(bic_7t$theta_hat)[1]*dim(bic_7t$theta_hat)[2]
-bic_7t_new = p*log(nw_new)-2*bic_7t$Log_VerossimilhanÁa
+bic_7t_new = p*log(nw_new)-2*bic_7t$Log_Verossimilhan√ßa
 
 p = dim(bic_8t$beta_hat)[1]*V_new + dim(bic_8t$theta_hat)[1]*dim(bic_8t$theta_hat)[2]
-bic_8t_new = p*log(nw_new)-2*bic_8t$Log_VerossimilhanÁa
+bic_8t_new = p*log(nw_new)-2*bic_8t$Log_Verossimilhan√ßa
 
 p = dim(bic_9t$beta_hat)[1]*V_new + dim(bic_9t$theta_hat)[1]*dim(bic_9t$theta_hat)[2]
-bic_9t_new = p*log(nw_new)-2*bic_9t$Log_VerossimilhanÁa
+bic_9t_new = p*log(nw_new)-2*bic_9t$Log_Verossimilhan√ßa
 
 p = dim(bic_11t$beta_hat)[1]*V_new + dim(bic_11t$theta_hat)[1]*dim(bic_11t$theta_hat)[2]
-bic_11t_new = p*log(nw_new)-2*bic_11t$Log_VerossimilhanÁa
+bic_11t_new = p*log(nw_new)-2*bic_11t$Log_Verossimilhan√ßa
 
 p = dim(bic_12t$beta_hat)[1]*V_new + dim(bic_12t$theta_hat)[1]*dim(bic_12t$theta_hat)[2]
-bic_12t_new = p*log(nw_new)-2*bic_12t$Log_VerossimilhanÁa
+bic_12t_new = p*log(nw_new)-2*bic_12t$Log_Verossimilhan√ßa
 
 p = dim(bic_13t$beta_hat)[1]*V_new + dim(bic_13t$theta_hat)[1]*dim(bic_13t$theta_hat)[2]
-bic_13t_new = p*log(nw_new)-2*bic_13t$Log_VerossimilhanÁa
+bic_13t_new = p*log(nw_new)-2*bic_13t$Log_Verossimilhan√ßa
 
 p = dim(bic_14t$beta_hat)[1]*V_new + dim(bic_14t$theta_hat)[1]*dim(bic_14t$theta_hat)[2]
-bic_14t_new = p*log(nw_new)-2*bic_14t$Log_VerossimilhanÁa
+bic_14t_new = p*log(nw_new)-2*bic_14t$Log_Verossimilhan√ßa
 
 p = dim(bic_15t$beta_hat)[1]*V_new + dim(bic_15t$theta_hat)[1]*dim(bic_15t$theta_hat)[2]
-bic_15t_new = p*log(nw_new)-2*bic_15t$Log_VerossimilhanÁa
+bic_15t_new = p*log(nw_new)-2*bic_15t$Log_Verossimilhan√ßa
 
 ##Tabela do BIC com novo "V":
 
@@ -1205,29 +1205,29 @@ tabela_bic_new=rbind(bic_2t_new,bic_3t_new,bic_4t_new,bic_5t_new,bic_6t_new,
 bic_7t_new,bic_8t_new,bic_9t_new,bic_11t_new,bic_12t_new,bic_13t_new,
 bic_14t_new,bic_15t_new,bic_10t_new,bic_20t_new,bic_30t_new,bic_40t_new,bic_50t_new)
 colnames(tabela_bic_new)="Valor do BIC"
-rownames(tabela_bic_new)=c("Modelo com 2 tÛpicos","Modelo com 3 tÛpicos",
-"Modelo com 4 tÛpicos","Modelo com 5 tÛpicos","Modelo com 6 tÛpicos",
-"Modelo com 7 tÛpicos","Modelo com 8 tÛpicos","Modelo com 9 tÛpicos",
-"Modelo com 11 tÛpicos","Modelo com 12 tÛpicos","Modelo com 13 tÛpicos",
-"Modelo com 14 tÛpicos","Modelo com 15 tÛpicos","Modelo com 10 tÛpicos",
-"Modelo com 20 tÛpicos","Modelo com 30 tÛpicos","Modelo com 40 tÛpicos",
-"Modelo com 50 tÛpicos")
+rownames(tabela_bic_new)=c("Modelo com 2 t√≥picos","Modelo com 3 t√≥picos",
+"Modelo com 4 t√≥picos","Modelo com 5 t√≥picos","Modelo com 6 t√≥picos",
+"Modelo com 7 t√≥picos","Modelo com 8 t√≥picos","Modelo com 9 t√≥picos",
+"Modelo com 11 t√≥picos","Modelo com 12 t√≥picos","Modelo com 13 t√≥picos",
+"Modelo com 14 t√≥picos","Modelo com 15 t√≥picos","Modelo com 10 t√≥picos",
+"Modelo com 20 t√≥picos","Modelo com 30 t√≥picos","Modelo com 40 t√≥picos",
+"Modelo com 50 t√≥picos")
 
 tabela_bic_new
 
-###Tabela com AIC e BIC, como o novo n˙mero de palavras (V):
+###Tabela com AIC e BIC, como o novo n√∫mero de palavras (V):
 
 tabela_aic_bic_new=cbind(tabela_aic_new,tabela_bic_new)
 plot(x=c(2:15,20,30,40,50),y=tabela_aic_bic_new[c(1:8,14,9:13,15:18),1],
-xlab="N˙mero de tÛpicos (k)",ylab="Valor do AIC",type="l",
-main="C·lculo do AIC, tirando as palavras do vocabulario 
-com frequÍncia igual desde 1 atÈ 3")
+xlab="N√∫mero de t√≥picos (k)",ylab="Valor do AIC",type="l",
+main="C√°lculo do AIC, tirando as palavras do vocabulario 
+com frequ√™ncia igual desde 1 at√© 3")
 
 tabela_aic_bic_new=tabela_aic_bic_new[order(tabela_aic_bic_new[,1],decreasing=F),]
 tabela_aic_bic_new
 
 ##############################################
-### C·lculo da perplexidade
+### C√°lculo da perplexidade
 ##############################################
 
 w = transform(data)
@@ -1265,7 +1265,7 @@ load("aic_30t.RData")
 load("aic_40t.RData")
 load("aic_50t.RData")
 
-###Funcao do c·lculo da perplexidade:
+###Funcao do c√°lculo da perplexidade:
 
 calc_perplexidade=function(obj_cadeia,e){
 
@@ -1281,7 +1281,7 @@ vet_aux_pwd=rep(0,nrow(theta_hat))
 for(d in 1:nrow(theta_hat)){
 
 Nd=length(w[[d]])
-prob_pal_docxtop=matrix(0,nrow(beta_hat),Nd) #Probabilidades das palavras do documento d x tÛpico
+prob_pal_docxtop=matrix(0,nrow(beta_hat),Nd) #Probabilidades das palavras do documento d x t√≥pico
 vet_aux_top=rep(0,nrow(beta_hat))
 
 for(k in 1:nrow(beta_hat)){
@@ -1300,7 +1300,7 @@ return(perplexidade)
 }
 
 
-##C·lculo da perplexidade:
+##C√°lculo da perplexidade:
 
 med_perplexidade_2t=calc_perplexidade(aic_2t,1e-323)
 med_perplexidade_3t=calc_perplexidade(aic_3t,1e-323)
@@ -1381,19 +1381,19 @@ med_perplexidade_40t,
 med_perplexidade_50t)
 
 tabela_perplexidade=cbind(c(2:15,20,30,40,50),vet_perplexidade)
-colnames(tabela_perplexidade)=c("N˙mero de tÛpicos",
+colnames(tabela_perplexidade)=c("N√∫mero de t√≥picos",
 "Valor da perplexidade")
 tabela_perplexidade
 
 plot(c(2:15,20,30,40,50),vet_perplexidade,type="l",
-xlab="N˙mero de tÛpicos no modelo LDA",
+xlab="N√∫mero de t√≥picos no modelo LDA",
 ylab="Valor da perplexidade")
 
 ##Depois de olhar os valores calculados da perplexidade, faria-se escolha do
-##modelo LDA com 50 tÛpicos.
+##modelo LDA com 50 t√≥picos.
 
 ############
-### C·lculo para o modelo treinado com 50000 iteracoes
+### C√°lculo para o modelo treinado com 50000 iteracoes
 
 data1=data[-(which(is.na(data[,1]))),]
 
@@ -1432,7 +1432,7 @@ load("aic_50000_30t.RData")
 load("aic_50000_40t.RData")
 load("aic_50000_50t.RData")
 
-###Funcao do c·lculo da perplexidade:
+###Funcao do c√°lculo da perplexidade:
 
 calc_perplexidade=function(obj_cadeia,e){
 
@@ -1448,7 +1448,7 @@ vet_aux_pwd=rep(0,nrow(theta_hat))
 for(d in 1:nrow(theta_hat)){
 
 Nd=length(w[[d]])
-prob_pal_docxtop=matrix(0,nrow(beta_hat),Nd) #Probabilidades das palavras do documento d x tÛpico
+prob_pal_docxtop=matrix(0,nrow(beta_hat),Nd) #Probabilidades das palavras do documento d x t√≥pico
 vet_aux_top=rep(0,nrow(beta_hat))
 
 for(k in 1:nrow(beta_hat)){
@@ -1466,7 +1466,7 @@ return(perplexidade)
 
 }
 
-##C·lculo da perplexidade:
+##C√°lculo da perplexidade:
 
 med_50000_perplexidade_2t=calc_perplexidade(aic_50000_2t,1e-323)
 med_50000_perplexidade_3t=calc_perplexidade(aic_50000_3t,1e-323)
@@ -1548,20 +1548,20 @@ med_50000_perplexidade_50t)
 
 #tabela_perplexidade=cbind(c(2:15,20,30,40,50),vet_perplexidade)
 tabela_perplexidade=cbind(c(2:10,20,30,40,50),vet_perplexidade)
-colnames(tabela_perplexidade)=c("N˙mero de tÛpicos",
+colnames(tabela_perplexidade)=c("N√∫mero de t√≥picos",
 "Valor da perplexidade")
 tabela_perplexidade
 
 #plot(c(2:15,20,30,40,50),vet_perplexidade,type="l",
 plot(c(2:10,20,30,40,50),vet_perplexidade,type="l",
-xlab="N˙mero de tÛpicos no modelo LDA",
+xlab="N√∫mero de t√≥picos no modelo LDA",
 ylab="Valor da perplexidade")
 
 ##Depois de olhar os valores calculados da perplexidade, faria-se escolha do
-##modelo LDA com 50 tÛpicos.
+##modelo LDA com 50 t√≥picos.
 
 ##############################################
-###C·lculo da medida da coerÍncia dos tÛpicos
+###C√°lculo da medida da coer√™ncia dos t√≥picos
 ##############################################
 
 w = transform(data)
@@ -1577,7 +1577,7 @@ w[[d]]=na.omit(w[[d]])
 w_unique=list()
 
 for (d in 1:length(w)){
-w_unique[[d]] = unique(w[[d]])	#palavras ˙nicas em cada documento
+w_unique[[d]] = unique(w[[d]])	#palavras √∫nicas em cada documento
 }
 
 load("aic_2t.RData")
@@ -1599,16 +1599,16 @@ load("aic_30t.RData")
 load("aic_40t.RData")
 load("aic_50t.RData")
 
-###Funcao do c·lculo da medida da coerÍncia nos tÛpicos:
+###Funcao do c√°lculo da medida da coer√™ncia nos t√≥picos:
 
 calc_med_coe=function(obj_cadeia,esc_top_palavras,e){
 
-#num_doc=dim(aic_2t$theta_hat)[1]	#n˙mero de documentos
+#num_doc=dim(aic_2t$theta_hat)[1]	#n√∫mero de documentos
 #beta_hat=aic_2t$beta_hat
 #esc_top_palavras=15
 #e=0.0001
 
-num_doc=dim(obj_cadeia$theta_hat)[1]	#n˙mero de documentos
+num_doc=dim(obj_cadeia$theta_hat)[1]	#n√∫mero de documentos
 beta_hat=obj_cadeia$beta_hat
 
 k_maiusc=dim(beta_hat)[1]
@@ -1625,7 +1625,7 @@ head(beta_hat_term_score)
 #beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_term_score) #A matriz transposta
 
@@ -1639,7 +1639,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 #x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -1673,9 +1673,9 @@ p_wi[k,i]=p_wi[k,i]+sum(w_unique[[d]]==tabela_top_palavras[i,k])
 
 p_wi=p_wi/num_doc
 
-##Medida da coerÍncia nos tÛpicos
+##Medida da coer√™ncia nos t√≥picos
 
-c_uci=rep(0,k_maiusc)	#Medida da coerÍncia
+c_uci=rep(0,k_maiusc)	#Medida da coer√™ncia
 
 for(k in 1:k_maiusc){
 
@@ -1721,16 +1721,16 @@ tabela_beta_ts=tabela_beta_ts[1:15,]))
 
 }
 
-###Funcao do c·lculo da medida da coerÍncia nos tÛpicos- vers„o 2:
+###Funcao do c√°lculo da medida da coer√™ncia nos t√≥picos- vers√£o 2:
 
 calc_med_coe_v2=function(obj_cadeia,esc_top_palavras,e){
 
-#num_doc=dim(aic_2t$theta_hat)[1]	#n˙mero de documentos
+#num_doc=dim(aic_2t$theta_hat)[1]	#n√∫mero de documentos
 #beta_hat=aic_2t$beta_hat
 #esc_top_palavras=15
 #e=0.0001
 
-num_doc=dim(obj_cadeia$theta_hat)[1]	#n˙mero de documentos
+num_doc=dim(obj_cadeia$theta_hat)[1]	#n√∫mero de documentos
 beta_hat=obj_cadeia$beta_hat
 
 k_maiusc=dim(beta_hat)[1]
@@ -1749,7 +1749,7 @@ head(beta_hat_term_score)
 #beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_term_score) #A matriz transposta
 
@@ -1763,7 +1763,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 #x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -1797,9 +1797,9 @@ p_wi[k,i]=p_wi[k,i]+sum(w_unique[[d]]==tabela_top_palavras[i,k])
 
 p_wi=p_wi/num_doc
 
-##Medida da coerÍncia nos tÛpicos
+##Medida da coer√™ncia nos t√≥picos
 
-c_uci=rep(0,k_maiusc)	#Medida da coerÍncia
+c_uci=rep(0,k_maiusc)	#Medida da coer√™ncia
 
 for(k in 1:k_maiusc){
 
@@ -1846,7 +1846,7 @@ tabela_beta_ts=tabela_beta_ts[1:15,]))
 
 }
 
-##C·lculo da medida da coerÍncia nos tÛpicos, em cada um dos modelos LDA:
+##C√°lculo da medida da coer√™ncia nos t√≥picos, em cada um dos modelos LDA:
 
 med_coe_calc_2t=calc_med_coe(aic_2t,15,0.0001)
 med_coe_calc_3t=calc_med_coe(aic_3t,15,0.0001)
@@ -1926,9 +1926,9 @@ med_coe_calc_15t[5]
 med_coe_calc_20t[5]
 med_coe_calc_30t[5]
 med_coe_calc_40t[5]
-med_coe_calc_50t[5]   #tira-se o c·lculo da medida da coerÍncia nesse modelo LDA
+med_coe_calc_50t[5]   #tira-se o c√°lculo da medida da coer√™ncia nesse modelo LDA
 
-##Amostrando os valores calculados da medida da coerÍncia nos tÛpicos:
+##Amostrando os valores calculados da medida da coer√™ncia nos t√≥picos:
 
 vet_med_coe=c(med_coe_calc_2t[[1]],
 med_coe_calc_3t[[1]],
@@ -1949,13 +1949,13 @@ med_coe_calc_30t[[1]],
 med_coe_calc_40t[[1]])
 
 tabela_med_coe=cbind(c(2:15,20,30,40),vet_med_coe)
-colnames(tabela_med_coe)=c("N˙mero de tÛpicos","Valor da medida de coerÍncia")
+colnames(tabela_med_coe)=c("N√∫mero de t√≥picos","Valor da medida de coer√™ncia")
 tabela_med_coe
 
-plot(c(2:15,20,30,40),vet_med_coe,type="l",xlab="N˙mero de tÛpicos no modelo LDA",
-ylab="Valor da medida de coerÍncia")
+plot(c(2:15,20,30,40),vet_med_coe,type="l",xlab="N√∫mero de t√≥picos no modelo LDA",
+ylab="Valor da medida de coer√™ncia")
 
-##C·lculo da medida da coerÍncia nos tÛpicos, em cada um dos modelos LDA
+##C√°lculo da medida da coer√™ncia nos t√≥picos, em cada um dos modelos LDA
 ##com a versao 2 da funcao:
 
 med_coe_calc_v2_2t=calc_med_coe_v2(aic_2t,15,0.0001)
@@ -2036,7 +2036,7 @@ med_coe_calc_v2_30t[5]
 med_coe_calc_v2_40t[5]
 med_coe_calc_v2_50t[5]
 
-##Amostrando os valores calculados da medida da coerÍncia nos tÛpicos:
+##Amostrando os valores calculados da medida da coer√™ncia nos t√≥picos:
 
 vet_med_coe_v2=c(med_coe_calc_v2_2t[[1]],
 med_coe_calc_v2_3t[[1]],
@@ -2058,28 +2058,28 @@ med_coe_calc_v2_40t[[1]],
 med_coe_calc_v2_50t[[1]])
 
 tabela_med_coe_v2=cbind(c(2:15,20,30,40,50),vet_med_coe_v2)
-colnames(tabela_med_coe_v2)=c("N˙mero de tÛpicos",
-"Valor da medida de coerÍncia com a funÁ„o 2")
+colnames(tabela_med_coe_v2)=c("N√∫mero de t√≥picos",
+"Valor da medida de coer√™ncia com a fun√ß√£o 2")
 tabela_med_coe_v2
 
 plot(c(2:15,20,30,40,50),vet_med_coe_v2,type="l",
-xlab="N˙mero de tÛpicos no modelo LDA",
-ylab="Valor da medida de coerÍncia com a funÁ„o 2")
+xlab="N√∫mero de t√≥picos no modelo LDA",
+ylab="Valor da medida de coer√™ncia com a fun√ß√£o 2")
 
-##Depois de olhar os valores, faria-se escolha do modelo LDA com 40 tÛpicos.
+##Depois de olhar os valores, faria-se escolha do modelo LDA com 40 t√≥picos.
 
-##Comparacao dos gr·ficos dos valores c·lculados das funcoes da medida de coerÍncia:
+##Comparacao dos gr√°ficos dos valores c√°lculados das funcoes da medida de coer√™ncia:
 
 par(mfrow = c(1, 2))
 
-plot(c(2:15,20,30,40),vet_med_coe,type="l",xlab="N˙mero de tÛpicos no modelo LDA",
-ylab="Valor da medida de coerÍncia")
+plot(c(2:15,20,30,40),vet_med_coe,type="l",xlab="N√∫mero de t√≥picos no modelo LDA",
+ylab="Valor da medida de coer√™ncia")
 
 plot(c(2:15,20,30,40,50),vet_med_coe_v2,type="l",
-xlab="N˙mero de tÛpicos no modelo LDA",
-ylab="Valor da medida de coerÍncia com a funÁ„o 2")
+xlab="N√∫mero de t√≥picos no modelo LDA",
+ylab="Valor da medida de coer√™ncia com a fun√ß√£o 2")
 
-##Olhando os gr·ficos de caixa, dos valores calculados da medida de coerÍncia,
+##Olhando os gr√°ficos de caixa, dos valores calculados da medida de coer√™ncia,
 ##com a funcao 2:
 
 boxplot(cbind(med_coe_calc_v2_2t[[2]],
@@ -2100,28 +2100,28 @@ med_coe_calc_v2_20t[[2]],
 med_coe_calc_v2_30t[[2]],
 med_coe_calc_v2_40t[[2]],
 med_coe_calc_v2_50t[[2]]),
-use.cols=T,names=c(2:15,20,30,40,50),xlab="N˙mero de tÛpicos no modelo LDA",
-ylab="Valor da medida de coerÍncia com a funÁ„o 2",
-main="Gr·ficos de caixa dos valores calculados
-da medida de coerÍncia, com a funÁ„o 2")
+use.cols=T,names=c(2:15,20,30,40,50),xlab="N√∫mero de t√≥picos no modelo LDA",
+ylab="Valor da medida de coer√™ncia com a fun√ß√£o 2",
+main="Gr√°ficos de caixa dos valores calculados
+da medida de coer√™ncia, com a fun√ß√£o 2")
 
 #########################################
 ####Escolha subjetiva do melhor modelo
 #########################################
 
 ####Olhando a matriz beta, dos modelos com k= 15, 20, 30 e 50, para interpretacao
-####dos tÛpicos:
+####dos t√≥picos:
 
 ##k=15:
 
 load("chain_10000_15.RData")
 
 beta_hat=apply(X=chain_10000_15$beta,FUN=mean,MARGIN=c(1,2))
-#beta_hat=aic_15t$beta_hat #MÈtodo alternativo
+#beta_hat=aic_15t$beta_hat #M√©todo alternativo
 
 head(beta_hat)
 
-#Visualizando um tÛpico, pontuacao do termo no beta_hat:
+#Visualizando um t√≥pico, pontuacao do termo no beta_hat:
 
 k_maiusc=dim(beta_hat)[1]
 beta_hat_term_score=matrix(0,k_maiusc,dim(beta_hat)[2])
@@ -2137,7 +2137,7 @@ head(beta_hat_term_score)
 beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_round_ts) #A matriz transposta
 
@@ -2151,7 +2151,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -2177,11 +2177,11 @@ write.csv(tabela_beta_ts, csv_path, row.names = FALSE)
 load("chain_10000_20.RData")
 
 beta_hat=apply(X=chain_10000_20$beta,FUN=mean,MARGIN=c(1,2))
-#beta_hat=aic_20t$beta_hat #MÈtodo alternativo
+#beta_hat=aic_20t$beta_hat #M√©todo alternativo
 
 head(beta_hat)
 
-#Visualizando um tÛpico, pontuacao do termo no beta_hat:
+#Visualizando um t√≥pico, pontuacao do termo no beta_hat:
 
 k_maiusc=dim(beta_hat)[1]
 beta_hat_term_score=matrix(0,k_maiusc,dim(beta_hat)[2])
@@ -2197,7 +2197,7 @@ head(beta_hat_term_score)
 beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_round_ts) #A matriz transposta
 
@@ -2211,7 +2211,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -2237,11 +2237,11 @@ write.csv(tabela_beta_ts, csv_path, row.names = FALSE)
 load("chain_10000_30.RData")
 
 beta_hat=apply(X=chain_10000_30$beta,FUN=mean,MARGIN=c(1,2))
-#beta_hat=aic_30t$beta_hat #MÈtodo alternativo
+#beta_hat=aic_30t$beta_hat #M√©todo alternativo
 
 head(beta_hat)
 
-#Visualizando um tÛpico, pontuacao do termo no beta_hat:
+#Visualizando um t√≥pico, pontuacao do termo no beta_hat:
 
 k_maiusc=dim(beta_hat)[1]
 beta_hat_term_score=matrix(0,k_maiusc,dim(beta_hat)[2])
@@ -2257,7 +2257,7 @@ head(beta_hat_term_score)
 beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_round_ts) #A matriz transposta
 
@@ -2271,7 +2271,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -2297,11 +2297,11 @@ write.csv(tabela_beta_ts, csv_path, row.names = FALSE)
 load("chain_10000_50.RData")
 
 beta_hat=apply(X=chain_10000_50$beta,FUN=mean,MARGIN=c(1,2))
-#beta_hat=aic_50t$beta_hat #MÈtodo alternativo
+#beta_hat=aic_50t$beta_hat #M√©todo alternativo
 
 head(beta_hat)
 
-#Visualizando um tÛpico, pontuacao do termo no beta_hat:
+#Visualizando um t√≥pico, pontuacao do termo no beta_hat:
 
 k_maiusc=dim(beta_hat)[1]
 beta_hat_term_score=matrix(0,k_maiusc,dim(beta_hat)[2])
@@ -2317,7 +2317,7 @@ head(beta_hat_term_score)
 beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_round_ts) #A matriz transposta
 
@@ -2331,7 +2331,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -2359,11 +2359,11 @@ write.csv(tabela_beta_ts, csv_path, row.names = FALSE)
 load("chain_10000_40.RData")
 
 beta_hat=apply(X=chain_10000_40$beta,FUN=mean,MARGIN=c(1,2))
-#beta_hat=aic_40t$beta_hat #MÈtodo alternativo
+#beta_hat=aic_40t$beta_hat #M√©todo alternativo
 
 head(beta_hat)
 
-#Visualizando um tÛpico, pontuacao do termo no beta_hat:
+#Visualizando um t√≥pico, pontuacao do termo no beta_hat:
 
 k_maiusc=dim(beta_hat)[1]
 beta_hat_term_score=matrix(0,k_maiusc,dim(beta_hat)[2])
@@ -2379,7 +2379,7 @@ head(beta_hat_term_score)
 beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_round_ts) #A matriz transposta
 
@@ -2393,7 +2393,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -2414,13 +2414,13 @@ write.csv(tabela_beta_ts, csv_path, row.names = FALSE)
 
 ##################################################################
 #################################################################
-####An·lisis exploratÛrio de theta e beta- estimativas pontuais:
+####An√°lisis explorat√≥rio de theta e beta- estimativas pontuais:
 #################################################################
 ##################################################################
 
-##Para o modelo com 40 tÛpicos:
+##Para o modelo com 40 t√≥picos:
 
-load("chain_10000_40.RData") #Carregando a cadeia com 40 tÛpicos
+load("chain_10000_40.RData") #Carregando a cadeia com 40 t√≥picos
 
 names(chain_10000_40)
 str(chain_10000_40)
@@ -2434,16 +2434,16 @@ dim(chain_10000_40$theta)
 #plot(chain_10000_40$theta[300,9,],type="l")
 
 #mean(chain_10000_40$theta[300,10,])
-#mean(chain_10000_40$theta[300,10,-(1:500)]) #j· resolvido no cÛdigo .cpp
+#mean(chain_10000_40$theta[300,10,-(1:500)]) #j√° resolvido no c√≥digo .cpp
 
 theta_hat=apply(X=chain_10000_40$theta,FUN=mean,MARGIN=c(1,2))
 #load("aic_40t.RData")
-#theta_hat=aic_40t$theta_hat    #mÈtodo alterno para obter theta hat
+#theta_hat=aic_40t$theta_hat    #m√©todo alterno para obter theta hat
 head(theta_hat)
 
 theta_hat_round=round(theta_hat,digits=3)
 
-#Ordenamento dos tÛpicos com 
+#Ordenamento dos t√≥picos com 
 #maior probabilidade nos documentos
 
 theta_hat_t=t(theta_hat_round) #A matriz transposta
@@ -2458,7 +2458,7 @@ for(i in 1:ncol(theta_hat_t)){
 
 x=cbind(vet_topicos,as.vector(theta_hat_t[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("TÛpico",paste("Prob. no doc.",i))
+colnames(x)=c("T√≥pico",paste("Prob. no doc.",i))
 
 if(i==1){
 tabela_theta=x
@@ -2474,13 +2474,13 @@ head(tabela_theta)
 #save(tabela_theta,file="tabela_theta_40t.RData")
 #load("tabela_theta_40t.RData")
 
-##Tabela do theta, para apresentacao no documento, com os melhores 3 tÛpicos:
+##Tabela do theta, para apresentacao no documento, com os melhores 3 t√≥picos:
 
 tabela_theta_3t=tabela_theta[1:3,]
 tabela_theta_3t=t(tabela_theta_3t)
 
-x=tabela_theta_3t[seq(1,dim(tabela_theta_3t)[1],by=2),] #primeiros tres tÛpicos
-y=tabela_theta_3t[seq(2,dim(tabela_theta_3t)[1],by=2),] #probabilidades dos primeiros tres tÛpicos
+x=tabela_theta_3t[seq(1,dim(tabela_theta_3t)[1],by=2),] #primeiros tres t√≥picos
+y=tabela_theta_3t[seq(2,dim(tabela_theta_3t)[1],by=2),] #probabilidades dos primeiros tres t√≥picos
 
 tabela_theta_final=matrix(0,dim(tabela_theta_3t)[1]/2,3)
 
@@ -2491,10 +2491,10 @@ tabela_theta_final[i,j]=paste0(x[i,j]," (",y[i,j],")")
 
 }}
 
-tabela_theta_apres=data.frame(1:nrow(tabela_theta_final),tabela_theta_final) #Tabela de apresentacao das probabilidades dos tÛpicos nos documentos
+tabela_theta_apres=data.frame(1:nrow(tabela_theta_final),tabela_theta_final) #Tabela de apresentacao das probabilidades dos t√≥picos nos documentos
 
-colnames(tabela_theta_apres)=c("No. do documento","1∞ tÛpico (probabilidade)",
-"2∞ tÛpico (probabilidade)","3∞ tÛpico (probabilidade)")
+colnames(tabela_theta_apres)=c("No. do documento","1¬∞ t√≥pico (probabilidade)",
+"2¬∞ t√≥pico (probabilidade)","3¬∞ t√≥pico (probabilidade)")
 
 tabela_theta_apres
 
@@ -2526,11 +2526,11 @@ dim(chain_10000_40$beta)
 #plot(chain_10000_40$beta[9,100,],type="l")
 
 #mean(chain_10000_40$beta[3,10,])
-#mean(chain_10000_40$beta[3,10,-(1:500)]) #j· foi resolvido no cÛdigo .cpp
+#mean(chain_10000_40$beta[3,10,-(1:500)]) #j√° foi resolvido no c√≥digo .cpp
 
 beta_hat=apply(X=chain_10000_40$beta,FUN=mean,MARGIN=c(1,2))
 #load("aic_40t.RData")
-#beta_hat=aic_40t$beta_hat    #mÈtodo alterno para obter beta hat
+#beta_hat=aic_40t$beta_hat    #m√©todo alterno para obter beta hat
 head(beta_hat)
 #save(beta_hat,file="beta_hat.RData")
 #load("beta_hat.RData")
@@ -2538,7 +2538,7 @@ head(beta_hat)
 beta_hat_round=round(beta_hat,digits=3)
 
 #Ordenamento das palavras com 
-#maior probabilidade nos tÛpicos
+#maior probabilidade nos t√≥picos
 
 beta_hat_t=t(beta_hat_round) #A matriz transposta
 
@@ -2552,7 +2552,7 @@ for(i in 1:ncol(beta_hat_t)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Prob. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Prob. no t√≥p.",i))
 
 if(i==1){
 tabela_beta=x
@@ -2579,7 +2579,7 @@ csv_path  = 'tabela_beta.csv'
 write.csv(tabela_beta, csv_path, row.names = FALSE)
 
 ########
-##Visualizando um tÛpico, pontuacao do termo no beta_hat:
+##Visualizando um t√≥pico, pontuacao do termo no beta_hat:
 
 k_maiusc=dim(beta_hat)[1]
 beta_hat_term_score=matrix(0,k_maiusc,dim(beta_hat)[2])
@@ -2596,7 +2596,7 @@ head(beta_hat_term_score)
 beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_round_ts) #A matriz transposta
 
@@ -2610,7 +2610,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -2711,7 +2711,7 @@ doc_sim_top10_final=data.frame(paste0(doc_sim_aux[2:11,1],"- ",
 doc_sim_aux[2:11,10]),doc_sim_aux[2:11,2])
 
 #colnames(doc_sim_top10_final)=c("10 DOCUMENTOS MAIS SIMILARES","VALOR DA SIMILARIDADE")
-colnames(doc_sim_top10_final)=c("10 DOCUMENTOS MAIS SIMILARES","DIST¬NCIA DE HELLINGER")
+colnames(doc_sim_top10_final)=c("10 DOCUMENTOS MAIS SIMILARES","DIST√ÇNCIA DE HELLINGER")
 rownames(doc_sim_top10_final)=1:10
 
 print(paste0("Documento ",d,": ",doc_sim_aux[1,10])) #Nome do documento examinado
@@ -2728,7 +2728,7 @@ return(doc_sim_top10_final)
 #csv_path  = 'doc_sim_top10_final.csv'
 #write.csv(doc_sim_top10_final, csv_path, row.names = TRUE)
 
-###Principais palavras dos principais tÛpicos no documento "d" (por pontuaÁ„o do termo):
+###Principais palavras dos principais t√≥picos no documento "d" (por pontua√ß√£o do termo):
 
 top_pal_top_t_doc=function(d){
 
@@ -2738,7 +2738,7 @@ topics=tabela_theta[1:3,d*2-1]
 prob_t=tabela_theta[1:3,d*2]
 
 top_pal_top_t_doc=tabela_beta_ts[1:15,topics*2-1]
-colnames(top_pal_top_t_doc)=paste0("TÛpico ",topics," (prob. ",prob_t,")")
+colnames(top_pal_top_t_doc)=paste0("T√≥pico ",topics," (prob. ",prob_t,")")
 rownames(top_pal_top_t_doc)=1:15
 
 #top_pal_top_t_doc
@@ -2746,7 +2746,7 @@ return(top_pal_top_t_doc)
 
 }
 
-###ProporÁıes de tÛpico esperadas no documento "d":
+###Propor√ß√µes de t√≥pico esperadas no documento "d":
 
 prop_t_esp_d=function(d){
 
@@ -2755,12 +2755,12 @@ prop_t_esp_d=function(d){
 x=tabela_theta[,c(d*2-1,d*2)]
 x=x[order(x[,1],decreasing=F),]
 
-return(barplot(x[,2],ylim=c(0,1),names.arg=x[,1],xlab="TÛpico",ylab="Probabilidade",
-main=paste0("ProporÁıes de tÛpico esperadas no documento ",d),cex.main=0.8))
+return(barplot(x[,2],ylim=c(0,1),names.arg=x[,1],xlab="T√≥pico",ylab="Probabilidade",
+main=paste0("Propor√ß√µes de t√≥pico esperadas no documento ",d),cex.main=0.8))
 
 }
 
-###RelatÛrio de apresentacao por documento "d":
+###Relat√≥rio de apresentacao por documento "d":
 
 relatorio=function(d){
 
@@ -2777,7 +2777,7 @@ heatmap(doc_sim,Rowv=NA,Colv=NA)
 
 ##########################################################################
 ##########################################################################
-### INFER NCIA VARIACIONAL
+### INFER√äNCIA VARIACIONAL
 ##########################################################################
 ##########################################################################
 
@@ -2821,9 +2821,9 @@ N = max( original_data[,2]) 	#deveria ser "V"
 # number of topics
 n_topics = c(3:15,seq(20,50,10))
 
-#n_topics = c(n_topics,60,70) ##Aumentando os modelos com 60 e 70 tÛpicos
+#n_topics = c(n_topics,60,70) ##Aumentando os modelos com 60 e 70 t√≥picos
 
-#Vetor de tempos na InferÍncia Variacional
+#Vetor de tempos na Infer√™ncia Variacional
 
 tempo_iv=list()
 
@@ -2901,12 +2901,12 @@ for(i in 1:5){
 #plot ( y = fit[[i]]$log_likelihood, 
 #	x = seq(1, (D * round(10000/D)),by = (minibatch_size * n_local_iter))[-length(seq(1, (D * round(10000/D)),by = (minibatch_size * n_local_iter)))],
 #	type = "l", cex.axis=1.5, cex.lab = 1.5, ylab = "Full likelihood", xlab = "Iteration", lwd = 2,
-#	main = paste(n_topics[i]," tÛpicos") )
+#	main = paste(n_topics[i]," t√≥picos") )
 
 plot ( y = fit[[i]]$log_likelihood, 
 	x = seq(1, (D * round(10000/D)),by = D),
 	type = "l", cex.axis=1.5, cex.lab = 1.5, ylab = "Full likelihood", xlab = "Iteration", lwd = 2,
-	main = paste(n_topics[i]," tÛpicos"))#, ylim = c(min(fit[[i]]$log_likelihood),0) )
+	main = paste(n_topics[i]," t√≥picos"))#, ylim = c(min(fit[[i]]$log_likelihood),0) )
 
 }
 
@@ -2919,14 +2919,14 @@ for(i in 1:length(n_topics)){
 plot ( y = fit[[i]]$log_likelihood, 
 	x = seq(1, (D * round(20000/D)),by = D),
 	type = "l", cex.axis=1.5, cex.lab = 1.5, ylab = "Full likelihood", xlab = "Iteration", lwd = 2,
-	main = paste(n_topics[i]," tÛpicos"))
+	main = paste(n_topics[i]," t√≥picos"))
 
 }
 
 ###Grade com limites###
 
-min_lv=c()	# MÌnimo da logverossimilhanca
-max_lv=c()	# M·ximo da logverossimilhanca
+min_lv=c()	# M√≠nimo da logverossimilhanca
+max_lv=c()	# M√°ximo da logverossimilhanca
 
 for(i in 1:length(n_topics)){
 
@@ -2942,25 +2942,25 @@ for(i in 1:length(n_topics)){
 plot ( y = fit[[i]]$log_likelihood, 
 	x = seq(1, (D * round(20000/D)),by = D),
 	type = "l", cex.axis=1.5, cex.lab = 1.5, ylab = "Full likelihood", xlab = "Iteration", lwd = 2,
-	main = paste(n_topics[i]," tÛpicos"), ylim = c(min(min_lv),max(max_lv)) )
+	main = paste(n_topics[i]," t√≥picos"), ylim = c(min(min_lv),max(max_lv)) )
 
 }
 
-###Gr·fico com linhas###
+###Gr√°fico com linhas###
 
-min_lv=c()	# MÌnimo da logverossimilhanca
-max_lv=c()	# M·ximo da logverossimilhanca
+min_lv=c()	# M√≠nimo da logverossimilhanca
+max_lv=c()	# M√°ximo da logverossimilhanca
 vet_leg=c()	# Vetor de nomes para a lenda
 
 for(i in 1:length(n_topics)){
 
 min_lv[i]=min(fit[[i]]$log_likelihood)
 max_lv[i]=max(fit[[i]]$log_likelihood)
-vet_leg[i]=paste0(n_topics[i]," tÛpicos")
+vet_leg[i]=paste0(n_topics[i]," t√≥picos")
 
 }
 
-#pdf("gr·fico.pdf")
+#pdf("gr√°fico.pdf")
 
 par(mar = c(par("mar")[-4],6), xpd=T)
 
@@ -2975,14 +2975,14 @@ lines( y = fit[[i]]$log_likelihood, x = seq(1, (D * round(20000/D)),by = D), lty
 
 }
 
-legend("topright", inset = c(-0.25,0), title="No. tÛpicos", legend = as.character(n_topics), col = 1:17, lty = 1:17)
+legend("topright", inset = c(-0.25,0), title="No. t√≥picos", legend = as.character(n_topics), col = 1:17, lty = 1:17)
 
 #dev.off()
 
-###Gr·fico com linhas, mudando os Ìndices das iteracoes ‡ 6672###
+###Gr√°fico com linhas, mudando os √≠ndices das iteracoes √† 6672###
 
-min_lv=c()	# MÌnimo da logverossimilhanca
-max_lv=c()	# M·ximo da logverossimilhanca
+min_lv=c()	# M√≠nimo da logverossimilhanca
+max_lv=c()	# M√°ximo da logverossimilhanca
 vet_leg=c()	# Vetor de nomes para a lenda
 t_linhas=c(rep(1,8),rep(3,8),2)
 cor_linhas=c(seq(1,8,1),seq(1,8,1),1)
@@ -2991,17 +2991,17 @@ for(i in 1:length(n_topics)){
 
 min_lv[i]=min(fit[[i]]$log_likelihood)
 max_lv[i]=max(fit[[i]]$log_likelihood)
-vet_leg[i]=paste0(n_topics[i]," tÛpicos")
+vet_leg[i]=paste0(n_topics[i]," t√≥picos")
 
 }
 
-#pdf("gr·fico.pdf",width = 6 )
+#pdf("gr√°fico.pdf",width = 6 )
 
 par(mar = c(par("mar")[-4],6), xpd=T)
 
 plot ( y = fit[[1]]$log_likelihood, 
 	x = seq(D/minibatch_size,6672,by = D/minibatch_size),
-	type = "l", ylab = "Log-verossimilhanÁa", xlab = "IteraÁ„o", lwd = 3,
+	type = "l", ylab = "Log-verossimilhan√ßa", xlab = "Itera√ß√£o", lwd = 3,
 	ylim = c(min(min_lv),max(max_lv)))# , cex.axis=1.5, cex.lab = 1.5)
 
 for(i in 2:length(n_topics)){
@@ -3012,12 +3012,12 @@ lwd = 3 , col = cor_linhas[i] )
 
 }
 
-legend("topright", inset = c(-0.25,0), title="No. tÛpicos", 
+legend("topright", inset = c(-0.25,0), title="No. t√≥picos", 
 legend = as.character(n_topics), col = cor_linhas, lty = t_linhas, lwd = 3)
 
 #dev.off()
 
-###Tabela da log-verossimilhanca na ˙ltima iteracao
+###Tabela da log-verossimilhanca na √∫ltima iteracao
 
 vet_ult_lv=c()
 
@@ -3027,7 +3027,7 @@ vet_ult_lv[i]=fit[[i]]$log_likelihood[1,48]
 
 }
 
-tab_log_ver_iv=data.frame(paste0("Modelo LDA com ",n_topics," tÛpicos"),vet_ult_lv)
+tab_log_ver_iv=data.frame(paste0("Modelo LDA com ",n_topics," t√≥picos"),vet_ult_lv)
 colnames(tab_log_ver_iv)=c("","VALOR DA LOG-VEROSSIMILHANCA")
 tab_log_ver_iv
 
@@ -3044,7 +3044,7 @@ ementa_frequent_words_beta_hat=list()
 ementa_frequent_words_score=list()
 
 for(i in 1:length(n_topics)){
-#for(i in 15:15){  #a coordenada 15 È o K=30
+#for(i in 15:15){  #a coordenada 15 √© o K=30
 #i=15
 
 gamma = fit[[i]]$gamma
@@ -3062,11 +3062,11 @@ lambda = fit[[i]]$lambda
 #for ( d in 1:D){
 #  theta_hat[d, ] = ( gamma[d, ] - 1 ) / ( sum( gamma[d, ] ) - n_topics[i] ) #??? estimativa pontoal (a moda)
 #}
-### Nao correr atÈ aquÌ ###
+### Nao correr at√© aqu√≠ ###
 
 theta_hat = matrix( 0, nrow = D, ncol = n_topics[i] )
 
-# estimating theta by its mÈdia
+# estimating theta by its m√©dia
 for ( d in 1:D){
   theta_hat[d, ] = gamma[d, ] / sum( gamma[d, ] )
 }
@@ -3082,7 +3082,7 @@ for ( k in 1:n_topics[i]){
   beta_hat[k, ] = lambda[k, ] / sum( lambda[k, ] )	#???
 }
 
-# score   #??? Olhar se È a Pontoacao do Termo
+# score   #??? Olhar se √© a Pontoacao do Termo
 score_matrix = matrix(0, nrow = n_topics[i], ncol = N)
 for (k in 1:n_topics[i]){
   for (n in 1:N){
@@ -3115,7 +3115,7 @@ for (j in 1:n_topics[i] ){
 vet_nom_iv=c()
 for (j in 1:n_topics[i] ){
 vet_nom_iv[j*2-1]="Palavra"
-vet_nom_iv[j*2]=paste0("Pont. no tÛp. ",j)
+vet_nom_iv[j*2]=paste0("Pont. no t√≥p. ",j)
 }
 
 colnames(frequent_words_score)=vet_nom_iv
@@ -3140,7 +3140,7 @@ ementa_frequent_words_score[[i]]=frequent_words_score
 #############################################################################
 
 
-##### C·lculo dos tempos proporcionais dos modelos MCMC ######
+##### C√°lculo dos tempos proporcionais dos modelos MCMC ######
 
 #install.packages("RcppArmadillo", configure.args = "--with-arma-64bit")
 #detach("package:RcppArmadillo", unload = TRUE)
@@ -3173,7 +3173,7 @@ tempo_mcmc_prop[[i]]=tempo_mcmc[[i]]*100
 
 }
 
-# Comparacao de tempos computacionais MCMC e InferÍncia Variacional
+# Comparacao de tempos computacionais MCMC e Infer√™ncia Variacional
 
 tab_tempos=matrix(0,length(n_topics),2)
 
@@ -3183,21 +3183,21 @@ tab_tempos[i,]=c(tempo_mcmc_prop[[i]][[3]],tempo_iv[[i]][[3]]/2)	#Os tempos da I
 
 }
 
-colnames(tab_tempos)=c("MCMC","InferÍncia Variacional")
+colnames(tab_tempos)=c("MCMC","Infer√™ncia Variacional")
 rownames(tab_tempos)=n_topics
 
 tab_tempos
 
-##Em inferÍncia variacional se tem 6672 iteracoees e vai-se pasar ‡ 10000
+##Em infer√™ncia variacional se tem 6672 iteracoees e vai-se pasar √† 10000
 
 tab_tempos2=cbind(tab_tempos,as.vector(tab_tempos[,2]*10000/6672))
 
 
 ####################################################
-# Escolha do melhor modelo na InferÍncia Variacional
+# Escolha do melhor modelo na Infer√™ncia Variacional
 ####################################################
 
-###Medida da coerÍncia
+###Medida da coer√™ncia
 
 w = transform(data)
 
@@ -3212,19 +3212,19 @@ w[[d]]=na.omit(w[[d]])
 w_unique=list()
 
 for (d in 1:length(w)){
-w_unique[[d]] = unique(w[[d]])	#palavras ˙nicas em cada documento
+w_unique[[d]] = unique(w[[d]])	#palavras √∫nicas em cada documento
 }
 
-###Funcao do c·lculo da medida da coerÍncia nos tÛpicos- vers„o 2:
+###Funcao do c√°lculo da medida da coer√™ncia nos t√≥picos- vers√£o 2:
 
 calc_med_coe_iv_v2=function(obj_theta,obj_beta,esc_top_palavras,e){
 
-#num_doc=dim(aic_2t$theta_hat)[1]	#n˙mero de documentos
+#num_doc=dim(aic_2t$theta_hat)[1]	#n√∫mero de documentos
 #beta_hat=aic_2t$beta_hat
 #esc_top_palavras=15
 #e=0.0001
 
-num_doc=dim(obj_theta)[1]	#n˙mero de documentos
+num_doc=dim(obj_theta)[1]	#n√∫mero de documentos
 beta_hat=obj_beta
 
 k_maiusc=dim(beta_hat)[1]
@@ -3243,7 +3243,7 @@ head(beta_hat_term_score)
 #beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_term_score) #A matriz transposta
 
@@ -3257,7 +3257,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 #x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -3291,9 +3291,9 @@ p_wi[k,i]=p_wi[k,i]+sum(w_unique[[d]]==tabela_top_palavras[i,k])
 
 p_wi=p_wi/num_doc
 
-##Medida da coerÍncia nos tÛpicos
+##Medida da coer√™ncia nos t√≥picos
 
-c_uci=rep(0,k_maiusc)	#Medida da coerÍncia
+c_uci=rep(0,k_maiusc)	#Medida da coer√™ncia
 
 for(k in 1:k_maiusc){
 
@@ -3340,7 +3340,7 @@ tabela_beta_ts=tabela_beta_ts[1:15,]))
 
 }
 
-##C·lculo da medida da coerÍncia nos tÛpicos, em cada um dos modelos LDA na InferÍncia Variacional:
+##C√°lculo da medida da coer√™ncia nos t√≥picos, em cada um dos modelos LDA na Infer√™ncia Variacional:
 
 med_coe_iv=list()
 
@@ -3356,7 +3356,7 @@ save(med_coe_iv,file="med_coe_iv.RData")
 #load("med_coe_iv.RData")
 #load("med_coe_iv_com_60_70.RData")
 
-##Amostrando os valores calculados da medida da coerÍncia nos tÛpicos:
+##Amostrando os valores calculados da medida da coer√™ncia nos t√≥picos:
 
 vet_med_coe_iv=c()
 
@@ -3367,16 +3367,16 @@ vet_med_coe_iv[i]=med_coe_iv[[i]][[1]]
 }
 
 tabela_med_coe_iv=cbind(n_topics,vet_med_coe_iv)
-colnames(tabela_med_coe_iv)=c("N˙mero de tÛpicos",
-"Valor da medida de coerÍncia")
+colnames(tabela_med_coe_iv)=c("N√∫mero de t√≥picos",
+"Valor da medida de coer√™ncia")
 tabela_med_coe_iv
 
 #plot(c(3:15,20,30,40,50,60,70),vet_med_coe_iv,type="l",
 plot(c(3:15,20,30,40,50),vet_med_coe_iv,type="l",
-xlab="N˙mero de tÛpicos no modelo LDA na InferÍncia Variacional",
-ylab="Valor da medida de coerÍncia")
+xlab="N√∫mero de t√≥picos no modelo LDA na Infer√™ncia Variacional",
+ylab="Valor da medida de coer√™ncia")
 
-##Olhando os gr·ficos de caixa, dos valores calculados da medida de coerÍncia
+##Olhando os gr√°ficos de caixa, dos valores calculados da medida de coer√™ncia
 
 boxplot(cbind(med_coe_iv[[1]][[2]],
 med_coe_iv[[2]][[2]],
@@ -3397,13 +3397,13 @@ med_coe_iv[[16]][[2]],
 med_coe_iv[[17]][[2]]),
 #med_coe_iv[[18]][[2]],
 #med_coe_iv[[19]][[2]]),
-#use.cols=T,names=c(3:15,20,30,40,50,60,70),xlab="N˙mero de tÛpicos no modelo LDA",
-use.cols=T,names=c(3:15,20,30,40,50),xlab="N˙mero de tÛpicos no modelo LDA",
-ylab="Valor da medida de coerÍncia")
-#,main="Gr·ficos de caixa dos valores calculados da medida de coerÍncia na InferÍncia Variacional")
+#use.cols=T,names=c(3:15,20,30,40,50,60,70),xlab="N√∫mero de t√≥picos no modelo LDA",
+use.cols=T,names=c(3:15,20,30,40,50),xlab="N√∫mero de t√≥picos no modelo LDA",
+ylab="Valor da medida de coer√™ncia")
+#,main="Gr√°ficos de caixa dos valores calculados da medida de coer√™ncia na Infer√™ncia Variacional")
 
-###Gr·fico da mÈdia e da mediana da medida da coerÍncia,
-###no MCMC e a InferÍncia Variacional:
+###Gr√°fico da m√©dia e da mediana da medida da coer√™ncia,
+###no MCMC e a Infer√™ncia Variacional:
 
 n_topics_mcmc=c(2:15,20,30,40,50)
 
@@ -3452,8 +3452,8 @@ vet_med_coe_iv_mediana=c(NA,vet_med_coe_iv_mediana)
 pdf("Media e mediana da C_UCI- MCMC e IV.pdf")
 
 plot(c(2:15,20,30,40,50,60,70),vet_med_coe_iv_media,type="l",
-xlab="N˙mero de tÛpicos no modelo LDA",
-ylab="Valor da medida de coerÍncia",
+xlab="N√∫mero de t√≥picos no modelo LDA",
+ylab="Valor da medida de coer√™ncia",
 ylim = range(c(vet_med_coe_mcmc_media,vet_med_coe_mcmc_mediana,
 vet_med_coe_iv_media,vet_med_coe_iv_mediana), na.rm = TRUE),lwd=2)
 
@@ -3462,27 +3462,27 @@ lines(c(2:15,20,30,40,50,60,70),vet_med_coe_mcmc_media,type="l",lty=1,col=3,lwd=
 lines(c(2:15,20,30,40,50,60,70),vet_med_coe_mcmc_mediana,type="l",lty=2,col=4,lwd=2)
 
 legend("topleft",                     
-       legend = c("MÈdia", "Mediana"),
+       legend = c("M√©dia", "Mediana"),
        col = c(3,4),        
        lty = c(1,2),                 
        lwd = 2,                       
        title = "MCMC",cex = 0.7)
 legend("bottomright",                     
-       legend = c("MÈdia", "Mediana"),
+       legend = c("M√©dia", "Mediana"),
        col = c(1,2),        
        lty = c(1,2),                 
        lwd = 2,                       
-       title = "InferÍncia Variacional",
+       title = "Infer√™ncia Variacional",
 	 cex = 0.7)
 
 dev.off()
 
 ##############################################################################
-###Inferencia, medida da similaridade e relatÛrio, para o modelo LDA escolhido
-###na inferÍncia variacional (K=30)
+###Inferencia, medida da similaridade e relat√≥rio, para o modelo LDA escolhido
+###na infer√™ncia variacional (K=30)
 ##############################################################################
 
-##Para o modelo com 30 tÛpicos:
+##Para o modelo com 30 t√≥picos:
 
 #ementa_theta_hat[[i]]
 #ementa_beta_hat[[i]]
@@ -3499,7 +3499,7 @@ head(theta_hat)
 
 theta_hat_round=round(theta_hat,digits=3)
 
-#Ordenamento dos tÛpicos com 
+#Ordenamento dos t√≥picos com 
 #maior probabilidade nos documentos
 
 theta_hat_t=t(theta_hat_round) #A matriz transposta
@@ -3514,7 +3514,7 @@ for(i in 1:ncol(theta_hat_t)){
 
 x=cbind(vet_topicos,as.vector(theta_hat_t[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("TÛpico",paste("Prob. no doc.",i))
+colnames(x)=c("T√≥pico",paste("Prob. no doc.",i))
 
 if(i==1){
 tabela_theta=x
@@ -3530,13 +3530,13 @@ head(tabela_theta)
 #save(tabela_theta,file="tabela_theta_40t.RData")
 #load("tabela_theta_40t.RData")
 
-##Tabela do theta, para apresentacao no documento, com os melhores 3 tÛpicos:
+##Tabela do theta, para apresentacao no documento, com os melhores 3 t√≥picos:
 
 tabela_theta_3t=tabela_theta[1:3,]
 tabela_theta_3t=t(tabela_theta_3t)
 
-x=tabela_theta_3t[seq(1,dim(tabela_theta_3t)[1],by=2),] #primeiros tres tÛpicos
-y=tabela_theta_3t[seq(2,dim(tabela_theta_3t)[1],by=2),] #probabilidades dos primeiros tres tÛpicos
+x=tabela_theta_3t[seq(1,dim(tabela_theta_3t)[1],by=2),] #primeiros tres t√≥picos
+y=tabela_theta_3t[seq(2,dim(tabela_theta_3t)[1],by=2),] #probabilidades dos primeiros tres t√≥picos
 
 tabela_theta_final=matrix(0,dim(tabela_theta_3t)[1]/2,3)
 
@@ -3547,10 +3547,10 @@ tabela_theta_final[i,j]=paste0(x[i,j]," (",y[i,j],")")
 
 }}
 
-tabela_theta_apres=data.frame(1:nrow(tabela_theta_final),tabela_theta_final) #Tabela de apresentacao das probabilidades dos tÛpicos nos documentos
+tabela_theta_apres=data.frame(1:nrow(tabela_theta_final),tabela_theta_final) #Tabela de apresentacao das probabilidades dos t√≥picos nos documentos
 
-colnames(tabela_theta_apres)=c("No. do documento","1∞ tÛpico (probabilidade)",
-"2∞ tÛpico (probabilidade)","3∞ tÛpico (probabilidade)")
+colnames(tabela_theta_apres)=c("No. do documento","1¬∞ t√≥pico (probabilidade)",
+"2¬∞ t√≥pico (probabilidade)","3¬∞ t√≥pico (probabilidade)")
 
 tabela_theta_apres
 
@@ -3581,7 +3581,7 @@ head(beta_hat)
 beta_hat_round=round(beta_hat,digits=3)
 
 #Ordenamento das palavras com 
-#maior probabilidade nos tÛpicos
+#maior probabilidade nos t√≥picos
 
 beta_hat_t=t(beta_hat_round) #A matriz transposta
 
@@ -3595,7 +3595,7 @@ for(i in 1:ncol(beta_hat_t)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Prob. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Prob. no t√≥p.",i))
 
 if(i==1){
 tabela_beta=x
@@ -3622,7 +3622,7 @@ head(tabela_beta)
 #write.csv(tabela_beta, csv_path, row.names = FALSE)
 
 ########
-##Visualizando um tÛpico, pontuacao do termo no beta_hat:
+##Visualizando um t√≥pico, pontuacao do termo no beta_hat:
 
 k_maiusc=dim(beta_hat)[1]
 beta_hat_term_score=matrix(0,k_maiusc,dim(beta_hat)[2])
@@ -3639,7 +3639,7 @@ head(beta_hat_term_score)
 beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_round_ts) #A matriz transposta
 
@@ -3653,7 +3653,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -3754,7 +3754,7 @@ doc_sim_top10_final=data.frame(paste0(doc_sim_aux[2:11,1],"- ",
 doc_sim_aux[2:11,10]),doc_sim_aux[2:11,2])
 
 #colnames(doc_sim_top10_final)=c("10 DOCUMENTOS MAIS SIMILARES","VALOR DA SIMILARIDADE")
-colnames(doc_sim_top10_final)=c("10 DOCUMENTOS MAIS SIMILARES","DIST¬NCIA DE HELLINGER")
+colnames(doc_sim_top10_final)=c("10 DOCUMENTOS MAIS SIMILARES","DIST√ÇNCIA DE HELLINGER")
 rownames(doc_sim_top10_final)=1:10
 
 print(paste0("Documento ",d,": ",doc_sim_aux[1,10])) #Nome do documento examinado
@@ -3771,7 +3771,7 @@ return(doc_sim_top10_final)
 #csv_path  = 'doc_sim_top10_final.csv'
 #write.csv(doc_sim_top10_final, csv_path, row.names = TRUE)
 
-###Principais palavras dos principais tÛpicos no documento "d" (por pontuaÁ„o do termo):
+###Principais palavras dos principais t√≥picos no documento "d" (por pontua√ß√£o do termo):
 
 top_pal_top_t_doc=function(d){
 
@@ -3781,7 +3781,7 @@ topics=tabela_theta[1:3,d*2-1]
 prob_t=tabela_theta[1:3,d*2]
 
 top_pal_top_t_doc=tabela_beta_ts[1:15,topics*2-1]
-colnames(top_pal_top_t_doc)=paste0("TÛpico ",topics," (prob. ",prob_t,")")
+colnames(top_pal_top_t_doc)=paste0("T√≥pico ",topics," (prob. ",prob_t,")")
 rownames(top_pal_top_t_doc)=1:15
 
 #top_pal_top_t_doc
@@ -3789,7 +3789,7 @@ return(top_pal_top_t_doc)
 
 }
 
-###ProporÁıes de tÛpico esperadas no documento "d":
+###Propor√ß√µes de t√≥pico esperadas no documento "d":
 
 prop_t_esp_d=function(d){
 
@@ -3798,12 +3798,12 @@ prop_t_esp_d=function(d){
 x=tabela_theta[,c(d*2-1,d*2)]
 x=x[order(x[,1],decreasing=F),]
 
-return(barplot(x[,2],ylim=c(0,1),names.arg=x[,1],xlab="TÛpico",ylab="Probabilidade",
-main=paste0("ProporÁıes de tÛpico esperadas no documento ",d),cex.main=0.8))
+return(barplot(x[,2],ylim=c(0,1),names.arg=x[,1],xlab="T√≥pico",ylab="Probabilidade",
+main=paste0("Propor√ß√µes de t√≥pico esperadas no documento ",d),cex.main=0.8))
 
 }
 
-###RelatÛrio de apresentacao por documento "d":
+###Relat√≥rio de apresentacao por documento "d":
 
 relatorio=function(d){
 
@@ -3849,9 +3849,9 @@ source("./Codes/mcmc_function.R")
 w = transform(data) 
 
 ##########################################################################
-####C·lculo de MCMC para modelos com 2-9, 11-15 tÛpicos, e o c·lculo dos
-####seus criterios de informacao; depois de olhar que o melhor modelo est·
-####perto do modelo com 10 tÛpicos:
+####C√°lculo de MCMC para modelos com 2-9, 11-15 t√≥picos, e o c√°lculo dos
+####seus criterios de informacao; depois de olhar que o melhor modelo est√°
+####perto do modelo com 10 t√≥picos:
 
 start = Sys.time()
 chain_50000_2=mcmc_cpp( data = as.matrix(data), w , K = 2,burning = 500, n_iter = 50000, save_it = 5 )
@@ -3944,7 +3944,7 @@ end - start
 
 save(chain_50000_15,file="chain_50000_15.RData")
 
-########Escolha de 10 tÛpicos:
+########Escolha de 10 t√≥picos:
 ####Cadeias para 50000 iteracoes:
 
 start = Sys.time()
@@ -3954,7 +3954,7 @@ end - start
 
 save(chain_50000_10,file="chain_50000_10.RData")
 
-########Escolha de 20 tÛpicos:
+########Escolha de 20 t√≥picos:
 ####Cadeias para 50000 iteracoes:
 
 start = Sys.time()
@@ -3964,7 +3964,7 @@ end - start
 
 save(chain_50000_20,file="chain_50000_20.RData")
 
-########Escolha de 30 tÛpicos:
+########Escolha de 30 t√≥picos:
 ####Cadeias para 50000 iteracoes:
 
 start = Sys.time()
@@ -3974,7 +3974,7 @@ end - start
 
 save(chain_50000_30,file="chain_50000_30.RData")
 
-########Escolha de 40 tÛpicos:
+########Escolha de 40 t√≥picos:
 ####Cadeias para 50000 iteracoes:
 
 start = Sys.time()
@@ -3984,7 +3984,7 @@ end - start
 
 save(chain_50000_40,file="chain_50000_40.RData")
 
-########Escolha de 50 tÛpicos:
+########Escolha de 50 t√≥picos:
 ####Cadeias para 50000 iteracoes:
 
 start = Sys.time()
@@ -4008,7 +4008,7 @@ vet_k=c(2:15,20,30,40,50)
 #tempo_mcmc_50000 = list()
 
 for(i in 1:length(vet_k)){
-#for(i in 2:4){ #salvo-se atÈ 5 na lista
+#for(i in 2:4){ #salvo-se at√© 5 na lista
 
 ptm = proc.time()
 chain_50000[[i]]=mcmc_cpp( data = as.matrix(data1), w , K = vet_k[i] ,burning = 3000, n_iter = 50000, save_it = 10 )
@@ -4132,7 +4132,7 @@ save(tempo_mcmc_50000_50,file="tempo_mcmc_50000_50.RData")
 
 
 ##########################
-###Fazendo o c·lculo da matriz beta_hat e theta_hat
+###Fazendo o c√°lculo da matriz beta_hat e theta_hat
 
 load("chain_50000_2.RData")
 aic_50000_2t=AIC_LDA(data_mat=data1,chain=chain_50000_2,mcmc_ind=1:dim(chain_50000_2[[1]])[3])
@@ -4187,7 +4187,7 @@ aic_50000_50t=AIC_LDA(data_mat=data1,chain=chain_50000_50,mcmc_ind=1:dim(chain_5
 save(aic_50000_50t,file="aic_50000_50t.RData")
 
 ###########################################################
-###Rodando 500.000 iteracoes no modelo LDA de 40 tÛpicos
+###Rodando 500.000 iteracoes no modelo LDA de 40 t√≥picos
 ###########################################################
 
 ###
@@ -4212,9 +4212,9 @@ save(aic_500000_40t,file="aic_500000_40t.RData")
 ###Modelo MCMC treinado com 50000 iteracoes
 #############################################
 
-##Para o modelo com 20 tÛpicos:
+##Para o modelo com 20 t√≥picos:
 
-load("chain_50000_20.RData") #Carregando a cadeia com 40 tÛpicos
+load("chain_50000_20.RData") #Carregando a cadeia com 40 t√≥picos
 
 names(chain_50000_20)
 str(chain_50000_20)
@@ -4228,16 +4228,16 @@ dim(chain_50000_20$theta)
 #plot(chain_50000_20$theta[300,9,],type="l")
 
 #mean(chain_50000_20$theta[300,10,])
-#mean(chain_50000_20$theta[300,10,-(1:500)]) #j· resolvido no cÛdigo .cpp
+#mean(chain_50000_20$theta[300,10,-(1:500)]) #j√° resolvido no c√≥digo .cpp
 
 theta_hat=apply(X=chain_50000_20$theta,FUN=mean,MARGIN=c(1,2))
 #load("aic_50000_20t.RData")
-#theta_hat=aic_50000_20t$theta_hat    #mÈtodo alterno para obter theta hat
+#theta_hat=aic_50000_20t$theta_hat    #m√©todo alterno para obter theta hat
 head(theta_hat)
 
 theta_hat_round=round(theta_hat,digits=3)
 
-#Ordenamento dos tÛpicos com 
+#Ordenamento dos t√≥picos com 
 #maior probabilidade nos documentos
 
 theta_hat_t=t(theta_hat_round) #A matriz transposta
@@ -4252,7 +4252,7 @@ for(i in 1:ncol(theta_hat_t)){
 
 x=cbind(vet_topicos,as.vector(theta_hat_t[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("TÛpico",paste("Prob. no doc.",i))
+colnames(x)=c("T√≥pico",paste("Prob. no doc.",i))
 
 if(i==1){
 tabela_theta=x
@@ -4268,13 +4268,13 @@ head(tabela_theta)
 #save(tabela_theta,file="tabela_theta_40t.RData")
 #load("tabela_theta_40t.RData")
 
-##Tabela do theta, para apresentacao no documento, com os melhores 3 tÛpicos:
+##Tabela do theta, para apresentacao no documento, com os melhores 3 t√≥picos:
 
 tabela_theta_3t=tabela_theta[1:3,]
 tabela_theta_3t=t(tabela_theta_3t)
 
-x=tabela_theta_3t[seq(1,dim(tabela_theta_3t)[1],by=2),] #primeiros tres tÛpicos
-y=tabela_theta_3t[seq(2,dim(tabela_theta_3t)[1],by=2),] #probabilidades dos primeiros tres tÛpicos
+x=tabela_theta_3t[seq(1,dim(tabela_theta_3t)[1],by=2),] #primeiros tres t√≥picos
+y=tabela_theta_3t[seq(2,dim(tabela_theta_3t)[1],by=2),] #probabilidades dos primeiros tres t√≥picos
 
 tabela_theta_final=matrix(0,dim(tabela_theta_3t)[1]/2,3)
 
@@ -4285,10 +4285,10 @@ tabela_theta_final[i,j]=paste0(x[i,j]," (",y[i,j],")")
 
 }}
 
-tabela_theta_apres=data.frame(1:nrow(tabela_theta_final),tabela_theta_final) #Tabela de apresentacao das probabilidades dos tÛpicos nos documentos
+tabela_theta_apres=data.frame(1:nrow(tabela_theta_final),tabela_theta_final) #Tabela de apresentacao das probabilidades dos t√≥picos nos documentos
 
-colnames(tabela_theta_apres)=c("No. do documento","1∞ tÛpico (probabilidade)",
-"2∞ tÛpico (probabilidade)","3∞ tÛpico (probabilidade)")
+colnames(tabela_theta_apres)=c("No. do documento","1¬∞ t√≥pico (probabilidade)",
+"2¬∞ t√≥pico (probabilidade)","3¬∞ t√≥pico (probabilidade)")
 
 tabela_theta_apres
 
@@ -4320,11 +4320,11 @@ dim(chain_50000_20$beta)
 #plot(chain_50000_20$beta[9,100,],type="l")
 
 #mean(chain_50000_20$beta[3,10,])
-#mean(chain_50000_20$beta[3,10,-(1:500)]) #j· foi resolvido no cÛdigo .cpp
+#mean(chain_50000_20$beta[3,10,-(1:500)]) #j√° foi resolvido no c√≥digo .cpp
 
 beta_hat=apply(X=chain_50000_20$beta,FUN=mean,MARGIN=c(1,2))
 #load("aic_50000_20t.RData")
-#beta_hat=aic_50000_20t$beta_hat    #mÈtodo alterno para obter beta hat
+#beta_hat=aic_50000_20t$beta_hat    #m√©todo alterno para obter beta hat
 head(beta_hat)
 #save(beta_hat,file="beta_hat.RData")
 #load("beta_hat.RData")
@@ -4332,7 +4332,7 @@ head(beta_hat)
 beta_hat_round=round(beta_hat,digits=3)
 
 #Ordenamento das palavras com 
-#maior probabilidade nos tÛpicos
+#maior probabilidade nos t√≥picos
 
 beta_hat_t=t(beta_hat_round) #A matriz transposta
 
@@ -4346,7 +4346,7 @@ for(i in 1:ncol(beta_hat_t)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Prob. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Prob. no t√≥p.",i))
 
 if(i==1){
 tabela_beta=x
@@ -4373,7 +4373,7 @@ csv_path  = 'tabela_beta.csv'
 write.csv(tabela_beta, csv_path, row.names = FALSE)
 
 ########
-##Visualizando um tÛpico, pontuacao do termo no beta_hat:
+##Visualizando um t√≥pico, pontuacao do termo no beta_hat:
 
 k_maiusc=dim(beta_hat)[1]
 beta_hat_term_score=matrix(0,k_maiusc,dim(beta_hat)[2])
@@ -4390,7 +4390,7 @@ head(beta_hat_term_score)
 beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_round_ts) #A matriz transposta
 
@@ -4404,7 +4404,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -4521,7 +4521,7 @@ return(doc_sim_top10_final)
 #csv_path  = 'doc_sim_top10_final.csv'
 #write.csv(doc_sim_top10_final, csv_path, row.names = TRUE)
 
-###Principais palavras dos principais tÛpicos no documento "d" (por pontuaÁ„o do termo):
+###Principais palavras dos principais t√≥picos no documento "d" (por pontua√ß√£o do termo):
 
 top_pal_top_t_doc=function(d){
 
@@ -4531,7 +4531,7 @@ topics=tabela_theta[1:3,d*2-1]
 prob_t=tabela_theta[1:3,d*2]
 
 top_pal_top_t_doc=tabela_beta_ts[1:15,topics*2-1]
-colnames(top_pal_top_t_doc)=paste0("TÛpico ",topics," (prob. ",prob_t,")")
+colnames(top_pal_top_t_doc)=paste0("T√≥pico ",topics," (prob. ",prob_t,")")
 rownames(top_pal_top_t_doc)=1:15
 
 #top_pal_top_t_doc
@@ -4539,7 +4539,7 @@ return(top_pal_top_t_doc)
 
 }
 
-###ProporÁıes de tÛpico esperadas no documento "d":
+###Propor√ß√µes de t√≥pico esperadas no documento "d":
 
 prop_t_esp_d=function(d){
 
@@ -4548,12 +4548,12 @@ prop_t_esp_d=function(d){
 x=tabela_theta[,c(d*2-1,d*2)]
 x=x[order(x[,1],decreasing=F),]
 
-return(barplot(x[,2],ylim=c(0,1),names.arg=x[,1],xlab="TÛpico",ylab="Probabilidade",
-main=paste0("ProporÁıes de tÛpico esperadas no documento ",d),cex.main=0.8))
+return(barplot(x[,2],ylim=c(0,1),names.arg=x[,1],xlab="T√≥pico",ylab="Probabilidade",
+main=paste0("Propor√ß√µes de t√≥pico esperadas no documento ",d),cex.main=0.8))
 
 }
 
-###RelatÛrio de apresentacao por documento "d":
+###Relat√≥rio de apresentacao por documento "d":
 
 relatorio=function(d){
 
@@ -4572,9 +4572,9 @@ heatmap(doc_sim,Rowv=NA,Colv=NA)
 ###Modelo MCMC treinado com 500000 iteracoes
 #############################################
 
-##Para o modelo com 40 tÛpicos:
+##Para o modelo com 40 t√≥picos:
 
-load("chain_500000_40.RData") #Carregando a cadeia com 40 tÛpicos
+load("chain_500000_40.RData") #Carregando a cadeia com 40 t√≥picos
 
 names(chain_500000_40)
 str(chain_500000_40)
@@ -4588,16 +4588,16 @@ dim(chain_500000_40$theta)
 #plot(chain_500000_40$theta[300,9,],type="l")
 
 #mean(chain_500000_40$theta[300,10,])
-#mean(chain_500000_40$theta[300,10,-(1:500)]) #j· resolvido no cÛdigo .cpp
+#mean(chain_500000_40$theta[300,10,-(1:500)]) #j√° resolvido no c√≥digo .cpp
 
 theta_hat=apply(X=chain_500000_40$theta,FUN=mean,MARGIN=c(1,2))
 #load("aic_500000_40t.RData")
-#theta_hat=aic_500000_40t$theta_hat    #mÈtodo alterno para obter theta hat
+#theta_hat=aic_500000_40t$theta_hat    #m√©todo alterno para obter theta hat
 head(theta_hat)
 
 theta_hat_round=round(theta_hat,digits=3)
 
-#Ordenamento dos tÛpicos com 
+#Ordenamento dos t√≥picos com 
 #maior probabilidade nos documentos
 
 theta_hat_t=t(theta_hat_round) #A matriz transposta
@@ -4612,7 +4612,7 @@ for(i in 1:ncol(theta_hat_t)){
 
 x=cbind(vet_topicos,as.vector(theta_hat_t[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("TÛpico",paste("Prob. no doc.",i))
+colnames(x)=c("T√≥pico",paste("Prob. no doc.",i))
 
 if(i==1){
 tabela_theta=x
@@ -4628,13 +4628,13 @@ head(tabela_theta)
 #save(tabela_theta,file="tabela_theta_40t.RData")
 #load("tabela_theta_40t.RData")
 
-##Tabela do theta, para apresentacao no documento, com os melhores 3 tÛpicos:
+##Tabela do theta, para apresentacao no documento, com os melhores 3 t√≥picos:
 
 tabela_theta_3t=tabela_theta[1:3,]
 tabela_theta_3t=t(tabela_theta_3t)
 
-x=tabela_theta_3t[seq(1,dim(tabela_theta_3t)[1],by=2),] #primeiros tres tÛpicos
-y=tabela_theta_3t[seq(2,dim(tabela_theta_3t)[1],by=2),] #probabilidades dos primeiros tres tÛpicos
+x=tabela_theta_3t[seq(1,dim(tabela_theta_3t)[1],by=2),] #primeiros tres t√≥picos
+y=tabela_theta_3t[seq(2,dim(tabela_theta_3t)[1],by=2),] #probabilidades dos primeiros tres t√≥picos
 
 tabela_theta_final=matrix(0,dim(tabela_theta_3t)[1]/2,3)
 
@@ -4645,10 +4645,10 @@ tabela_theta_final[i,j]=paste0(x[i,j]," (",y[i,j],")")
 
 }}
 
-tabela_theta_apres=data.frame(1:nrow(tabela_theta_final),tabela_theta_final) #Tabela de apresentacao das probabilidades dos tÛpicos nos documentos
+tabela_theta_apres=data.frame(1:nrow(tabela_theta_final),tabela_theta_final) #Tabela de apresentacao das probabilidades dos t√≥picos nos documentos
 
-colnames(tabela_theta_apres)=c("No. do documento","1∞ tÛpico (probabilidade)",
-"2∞ tÛpico (probabilidade)","3∞ tÛpico (probabilidade)")
+colnames(tabela_theta_apres)=c("No. do documento","1¬∞ t√≥pico (probabilidade)",
+"2¬∞ t√≥pico (probabilidade)","3¬∞ t√≥pico (probabilidade)")
 
 tabela_theta_apres
 
@@ -4680,11 +4680,11 @@ dim(chain_500000_40$beta)
 #plot(chain_500000_40$beta[9,100,],type="l")
 
 #mean(chain_500000_40$beta[3,10,])
-#mean(chain_500000_40$beta[3,10,-(1:500)]) #j· foi resolvido no cÛdigo .cpp
+#mean(chain_500000_40$beta[3,10,-(1:500)]) #j√° foi resolvido no c√≥digo .cpp
 
 beta_hat=apply(X=chain_500000_40$beta,FUN=mean,MARGIN=c(1,2))
 #load("aic_500000_40t.RData")
-#beta_hat=aic_500000_40t$beta_hat    #mÈtodo alterno para obter beta hat
+#beta_hat=aic_500000_40t$beta_hat    #m√©todo alterno para obter beta hat
 head(beta_hat)
 #save(beta_hat,file="beta_hat.RData")
 #load("beta_hat.RData")
@@ -4692,7 +4692,7 @@ head(beta_hat)
 beta_hat_round=round(beta_hat,digits=3)
 
 #Ordenamento das palavras com 
-#maior probabilidade nos tÛpicos
+#maior probabilidade nos t√≥picos
 
 beta_hat_t=t(beta_hat_round) #A matriz transposta
 
@@ -4706,7 +4706,7 @@ for(i in 1:ncol(beta_hat_t)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Prob. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Prob. no t√≥p.",i))
 
 if(i==1){
 tabela_beta=x
@@ -4733,7 +4733,7 @@ csv_path  = 'tabela_beta.csv'
 write.csv(tabela_beta, csv_path, row.names = FALSE)
 
 ########
-##Visualizando um tÛpico, pontuacao do termo no beta_hat:
+##Visualizando um t√≥pico, pontuacao do termo no beta_hat:
 
 k_maiusc=dim(beta_hat)[1]
 beta_hat_term_score=matrix(0,k_maiusc,dim(beta_hat)[2])
@@ -4750,7 +4750,7 @@ head(beta_hat_term_score)
 beta_hat_round_ts=round(beta_hat_term_score,digits=3)
 
 #Ordenamento das palavras com 
-#maior pontuacao nos tÛpicos
+#maior pontuacao nos t√≥picos
 
 beta_hat_t_ts=t(beta_hat_round_ts) #A matriz transposta
 
@@ -4764,7 +4764,7 @@ for(i in 1:ncol(beta_hat_t_ts)){
 #x=cbind(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=data.frame(vet_palavras,as.vector(beta_hat_t_ts[,i]))
 x=x[order(x[,2],decreasing=T),]
-colnames(x)=c("Palavra",paste("Pont. no tÛp.",i))
+colnames(x)=c("Palavra",paste("Pont. no t√≥p.",i))
 
 if(i==1){
 tabela_beta_ts=x
@@ -4881,7 +4881,7 @@ return(doc_sim_top10_final)
 #csv_path  = 'doc_sim_top10_final.csv'
 #write.csv(doc_sim_top10_final, csv_path, row.names = TRUE)
 
-###Principais palavras dos principais tÛpicos no documento "d" (por pontuaÁ„o do termo):
+###Principais palavras dos principais t√≥picos no documento "d" (por pontua√ß√£o do termo):
 
 top_pal_top_t_doc=function(d){
 
@@ -4891,7 +4891,7 @@ topics=tabela_theta[1:3,d*2-1]
 prob_t=tabela_theta[1:3,d*2]
 
 top_pal_top_t_doc=tabela_beta_ts[1:15,topics*2-1]
-colnames(top_pal_top_t_doc)=paste0("TÛpico ",topics," (prob. ",prob_t,")")
+colnames(top_pal_top_t_doc)=paste0("T√≥pico ",topics," (prob. ",prob_t,")")
 rownames(top_pal_top_t_doc)=1:15
 
 #top_pal_top_t_doc
@@ -4899,7 +4899,7 @@ return(top_pal_top_t_doc)
 
 }
 
-###ProporÁıes de tÛpico esperadas no documento "d":
+###Propor√ß√µes de t√≥pico esperadas no documento "d":
 
 prop_t_esp_d=function(d){
 
@@ -4908,12 +4908,12 @@ prop_t_esp_d=function(d){
 x=tabela_theta[,c(d*2-1,d*2)]
 x=x[order(x[,1],decreasing=F),]
 
-return(barplot(x[,2],ylim=c(0,1),names.arg=x[,1],xlab="TÛpico",ylab="Probabilidade",
-main=paste0("ProporÁıes de tÛpico esperadas no documento ",d),cex.main=0.8))
+return(barplot(x[,2],ylim=c(0,1),names.arg=x[,1],xlab="T√≥pico",ylab="Probabilidade",
+main=paste0("Propor√ß√µes de t√≥pico esperadas no documento ",d),cex.main=0.8))
 
 }
 
-###RelatÛrio de apresentacao por documento "d":
+###Relat√≥rio de apresentacao por documento "d":
 
 relatorio=function(d){
 
@@ -4937,7 +4937,7 @@ sourceCpp("./Codes/mcmc_function-beta_inicial.cpp")
 K=40		#O melhor modelo escolhido
 V=max(na.omit(data[,1]))
 
-##Olhando o inÌcio da cadeia dos beta_{13 , 1} e beta_{27 , 970}, para o modelo LDA
+##Olhando o in√≠cio da cadeia dos beta_{13 , 1} e beta_{27 , 970}, para o modelo LDA
 ##com K=40 e com 10000 iteracoes
 
 chain_init_10000_40=list()
@@ -4998,10 +4998,10 @@ par(mfrow=c(3,2))
 for(i in 1:3){
 plot(chain_init_10000_40[[i]]$beta[13,1,],type="l",
 ylab=bquote(beta["13,1"]),
-xlab=bquote("N˙mero de iteraÁ„o, com semente de "*.(semente[i])))
+xlab=bquote("N√∫mero de itera√ß√£o, com semente de "*.(semente[i])))
 plot(chain_init_10000_40[[i]]$beta[27,970,],type="l",
 ylab=bquote(beta["27,970"]),
-xlab=bquote("N˙mero de iteraÁ„o, com semente de "*.(semente[i])))
+xlab=bquote("N√∫mero de itera√ß√£o, com semente de "*.(semente[i])))
 }
 
 #############################################################################
@@ -5016,7 +5016,7 @@ head(beta_hat_term_score)
 which.max(beta_hat_term_score)
 arrayInd(which.max(beta_hat_term_score), dim(beta_hat_term_score))
 beta_hat_term_score[13,1]
-### Nao correr atÈ aquÌ ###
+### Nao correr at√© aqu√≠ ###
 
 ind_beta=matrix(0,prod(dim(beta_hat_term_score)),3)
 x=0
@@ -5033,7 +5033,7 @@ ind_beta[x,]=c(beta_hat_term_score[k,v],k,v)
 ind_beta_ord=ind_beta[order(ind_beta[, 1], decreasing = TRUE), ]
 head(ind_beta_ord)
 
-##Olhando os gr·ficos das cadeias dos beta_{kv}
+##Olhando os gr√°ficos das cadeias dos beta_{kv}
 
 dim(chain_500000_40$beta)
 
@@ -5043,7 +5043,7 @@ for(i in 1:6){
 #i=1
 plot(chain_500000_40$beta[ind_beta_ord[i,2],ind_beta_ord[i,3],],type="l",
 ylab=bquote(beta[.(ind_beta_ord[i,2])* "," *.(ind_beta_ord[i,3])]),
-xlab="N˙mero de iteraÁ„o, depois do\n aquecimento e espaÁamento")
+xlab="N√∫mero de itera√ß√£o, depois do\n aquecimento e espa√ßamento")
 }
 
 #######
@@ -5066,7 +5066,7 @@ ind_beta[x,]=c(beta_hat[k,v],k,v)
 ind_beta_ord=ind_beta[order(ind_beta[, 1], decreasing = TRUE), ]
 head(ind_beta_ord)
 
-##Olhando os gr·ficos das cadeias dos beta_{kv}
+##Olhando os gr√°ficos das cadeias dos beta_{kv}
 
 dim(chain_500000_40$beta)
 
@@ -5076,7 +5076,7 @@ for(i in 1:6){
 #i=2
 plot(chain_500000_40$beta[ind_beta_ord[i,2],ind_beta_ord[i,3],],type="l",
 ylab=bquote(beta[.(ind_beta_ord[i,2])* "," *.(ind_beta_ord[i,3])]),
-xlab="N˙mero de iteraÁ„o, depois do\n aquecimento e espaÁamento")
+xlab="N√∫mero de itera√ß√£o, depois do\n aquecimento e espa√ßamento")
 }
 
 ###############################
@@ -5101,7 +5101,7 @@ ind_theta[x,]=c(theta_hat[d,k],d,k)
 ind_theta_ord=ind_theta[order(ind_theta[, 1], decreasing = TRUE), ]
 head(ind_theta_ord)
 
-##Olhando os gr·ficos das cadeias dos theta_{dk}
+##Olhando os gr√°ficos das cadeias dos theta_{dk}
 
 dim(chain_500000_40$theta)
 
@@ -5111,5 +5111,5 @@ for(i in 1:6){
 #i=2
 plot(chain_500000_40$theta[ind_theta_ord[i,2],ind_theta_ord[i,3],],type="l",
 ylab=bquote(theta[.(ind_theta_ord[i,2])* "," *.(ind_theta_ord[i,3])]),
-xlab="N˙mero de iteraÁ„o, depois do\n aquecimento e espaÁamento")
+xlab="N√∫mero de itera√ß√£o, depois do\n aquecimento e espa√ßamento")
 }
